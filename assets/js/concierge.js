@@ -15,25 +15,25 @@ window.AI_CONCIERGE = (function () {
   // Knowledge base for instant local fallback
   const KNOWLEDGE = {
     es: {
-      distribucion: "Esta exclusiva residencia en Planta Baja cuenta con 2 recámaras completas con baño en suite y clóset vestidor, estancia de estar y comedor de concepto abierto integrado a la terraza apergolada, cocina equipada con barra de diseñador, amplio jardín privado con paisajismo tropical y su propia alberca plunge pool privada con vistas frontales al campo de golf PGA Riviera Maya.",
+      distribucion: "Esta exclusiva residencia en Planta Baja cuenta con 2 recámaras completas con baño en suite y clóset vestidor, estancia y comedor integrados con canceles corredizos a su amplia terraza privada, cocina de diseñador, y acceso directo desde la terraza hacia las áreas garden y albercas del proyecto, con vistas despejadas al campo de golf PGA Riviera Maya.",
       precio: "El precio de esta oportunidad única de reventa en Planta Baja es de $536,000 USD. A diferencia de las compras en pre-construcción donde se debe esperar años de obra, esta propiedad es de ENTREGA INMEDIATA: se encuentra lista para escrituración, posesión inmediata y puesta en operación de renta vacacional desde el primer día.",
       amenidades: "Al ser propietario de esta residencia en Kaan-Ha, usted y sus huéspedes disfrutan de todas las amenidades exclusivas de Tulum Country Club: el campo de golf de campeonato PGA Riviera Maya (18 hoyos de campeonato + 9 ejecutivos diseñados por Robert Trent Jones II), el club de playa privado KAY Beach Club sobre el mar Caribe, centro deportivo de raqueta (tenis, pádel, pickleball), gimnasio de alto rendimiento, spa holístico en la selva, cenotes naturales preservados y seguridad privada 24/7 con doble caseta biométrica.",
       cita: "Con mucho gusto podemos coordinar una visita privada presencial a la residencia o una videollamada guiada con Jorge Sandoval para revisar planos arquitectónicos, títulos de propiedad y proyecciones financieras de rentabilidad.",
-      default: "Kaan-Ha Garden Residence es una oportunidad exclusiva de reventa en Planta Baja dentro de Tulum Country Club: 2 recámaras con baño en suite, amplio jardín privado, alberca plunge pool propia, acabados artesanales en Chukum y vistas frontales al campo de golf PGA Riviera Maya. Precio: $536,000 USD con entrega inmediata."
+      default: "Kaan-Ha Residence es una oportunidad exclusiva de reventa en Planta Baja dentro de Tulum Country Club: 2 recámaras con baño en suite, amplia terraza privada con salida directa a la zona garden y albercas del proyecto, acabados artesanales en Chukum y vistas al campo de golf PGA Riviera Maya. Precio: $536,000 USD con entrega inmediata."
     },
     en: {
-      distribucion: "This exclusive Ground-Floor Garden Residence features 2 primary bedrooms with private en-suite spa bathrooms and walk-in closets, an open-concept living and dining salon opening onto the pergola terrace, designer kitchen, expansive private landscaped garden, and an integrated private plunge pool overlooking the greens of the PGA Riviera Maya golf course.",
+      distribucion: "This exclusive Ground-Floor residence features 2 primary bedrooms with en-suite spa bathrooms and walk-in closets, fluid living and dining salon with floor-to-ceiling glass sliding onto an expansive private terrace, and direct walkout from the terrace to the project's garden grounds and swimming pools, with fairway views of the PGA Riviera Maya golf course.",
       precio: "The turnkey resale price for this exclusive Ground-Floor Garden Residence is $536,000 USD. Unlike pre-construction developments that require years of waiting, this is an IMMEDIATE DELIVERY opportunity: fully finished, turnkey, and ready for immediate deed transfer and instant vacation rental yield from day one.",
       amenidades: "Ownership includes full privileges across the premier Tulum Country Club master community: the world-renowned PGA Riviera Maya Golf Course (27 championship holes sculpted by Robert Trent Jones II), private oceanfront KAY Beach Club on the turquoise Caribbean Sea, high-performance racquet sports center (tennis/paddle/pickleball), jungle wellness spa, natural cenotes, and 24/7 gated security with double biometric checkpoints.",
       cita: "We would be delighted to arrange a private on-site tour or a live video walkthrough with Jorge Sandoval to review architectural floor plans, deed paperwork, and rental yield projections.",
-      default: "Kaan-Ha Garden Residence is a rare turnkey ground-floor resale opportunity inside Tulum Country Club: 2 primary bedrooms with en-suite bathrooms, private landscaped garden, integrated plunge pool, authentic Mayan Chukum plaster, and direct fairway views of the PGA Riviera Maya golf course for $536,000 USD with immediate delivery."
+      default: "Kaan-Ha Residence is a rare turnkey ground-floor resale opportunity inside Tulum Country Club: 2 primary bedrooms with en-suite bathrooms, expansive private terrace opening directly to the resort's garden grounds and swimming pools, authentic Mayan Chukum plaster, and fairway views of the PGA Riviera Maya golf course for $536,000 USD with immediate delivery."
     },
     fr: {
-      distribucion: "Cette résidence exclusive en Rez-de-Jardin comprend 2 chambres principales avec salles de bains spa attenantes et dressings, un vaste séjour lumineux ouvrant sur la terrasse ombragée, une cuisine équipée, un grand jardin privatif paysager et une piscine plunge pool privée avec vue imprenable sur le golf PGA Riviera Maya.",
-      precio: "Le prix de cette opportunité exclusive de revente en Rez-de-Jardin est de $536,000 USD. Contrairement aux projets sur plan qui exigent des mois d'attente, il s'agit d'une LIVRAISON IMMÉDIATE : le bien est achevé, clé en main, prêt pour la signature notariée et pour générer des revenus locatifs dès le premier jour.",
+      distribucion: "Cette résidence d'exception en Rez-de-Chaussée comprend 2 chambres principales avec salles de bains spa attenantes et dressings, un vaste séjour lumineux ouvrant sur une grande terrasse privative, avec accès direct depuis la terrasse vers les espaces garden et les piscines du domaine, et vues imprenables sur le golf PGA Riviera Maya.",
+      precio: "Le prix de cette opportunité exclusive de reventa en Rez-de-Chaussée est de $536,000 USD. Contrairement aux projets sur plan qui exigent des mois d'attente, il s'agit d'une LIVRAISON IMMÉDIATE : le bien est achevé, clé en main, prêt pour la signature notariée et pour générer des revenus locatifs dès le premier jour.",
       amenidades: "En tant que propriétaire, vous accédez à toutes les infrastructures d'élite du Tulum Country Club : le golf PGA Riviera Maya (27 trous signés Robert Trent Jones II), le club de plage privé KAY Beach Club face aux Caraïbes, le complexe sportif (tennis, padel, pickleball), le spa au cœur de la jungle, des cénotes préservés et une sécurité 24h/24 avec double contrôle d'accès.",
       cita: "C'est avec grand plaisir que nous organisons une visite privée sur place ou une présentation vidéo en direct avec Jorge Sandoval afin d'examiner les plans, le titre de propriété et les projections de rentabilité.",
-      default: "Kaan-Ha Garden Residence est une opportunité exclusive de revente en Rez-de-Jardin au sein de Tulum Country Club : 2 chambres en suite, vaste jardin privatif, piscine plunge pool, finitions en Chukum naturel et vues directes sur le golf PGA à $536,000 USD avec livraison immédiate."
+      default: "Kaan-Ha Residence est une opportunité exclusive de revente en Rez-de-Chaussée au sein de Tulum Country Club : 2 chambres en suite, vaste terrasse privée ouvrant sur les espaces garden et piscines du complexe, finitions en Chukum naturel et vues directes sur le golf PGA à $536,000 USD avec livraison immédiate."
     }
   };
 
@@ -48,20 +48,20 @@ window.AI_CONCIERGE = (function () {
 
     // Try Gemini API first
     try {
-      const systemInstruction = `You are the Ultra-Luxury AI Concierge for an exclusive Ground-Floor Garden Resale Residence at Kaan-Ha inside Tulum Country Club (Riviera Maya, Mexico).
+      const systemInstruction = `You are the Ultra-Luxury AI Concierge for an exclusive Ground-Floor Resale Residence at Kaan-Ha inside Tulum Country Club (Riviera Maya, Mexico).
 Your tone is quiet luxury, sophisticated, courteous, discreet, and highly knowledgeable.
 Crucial Context:
-- This is NOT a generic pre-sale development of 50 units. It is an EXCLUSIVE RESALE OPPORTUNITY for a single, highly desirable GROUND-FLOOR (Planta Baja / Rez-de-Jardin) Garden Residence.
+- This is NOT a generic pre-sale development of 50 units. It is an EXCLUSIVE RESALE OPPORTUNITY for a single, highly desirable GROUND-FLOOR (Planta Baja / Rez-de-Chaussée) Residence with Private Terrace.
 - Price: $536,000 USD.
 - Delivery: IMMEDIATE DELIVERY (Entrega Inmediata) / Turnkey. Ready for deed transfer, immediate personal enjoyment, and immediate vacation rental ROI without waiting for construction.
-- Level & Features: Ground Floor (Planta Baja) with its own expansive private landscaped garden and private plunge pool (alberca plunge pool privada en jardín).
-- Layout: 2 Bedrooms with en-suite bathrooms and walk-in closets, open-concept salon and designer kitchen, pergola terrace, and direct sliding walkout to private garden and pool.
+- Level & Features: Ground Floor (Planta Baja / Rez-de-Chaussée) with its own expansive private terrace opening directly to the project's garden areas and swimming pools (terraza privada con salida a la zona garden y albercas del desarrollo).
+- Layout: 2 Bedrooms with en-suite bathrooms and walk-in closets, open-concept salon and designer kitchen, pergola terrace, and direct sliding walkout towards garden grounds and pools.
 - Views: Direct frontal views to the PGA Riviera Maya Golf Course (27 holes designed by Robert Trent Jones II).
 - Finishes: Authentic organic Mayan Chukum plaster, local hardwood, marble bathrooms.
 - Master Community Amenities: Private oceanfront KAY Beach Club, PGA Riviera Maya Golf, Sports Center (tennis, paddle, pickleball, gym), Spa, natural cenotes, 24/7 double-gated biometric security.
 - Direct Contact / Broker: Jorge Sandoval (+52 1 656 143 6266).
 Your Mission:
-Answer inquiries with elegance and precise facts in ${lang.toUpperCase()} language. Highlight the unique advantages of Ground-Floor garden living, immediate delivery, private garden & pool, and the luxury amenities of Tulum Country Club. Always invite the client to book a private viewing or chat on WhatsApp with Jorge Sandoval.`;
+Answer inquiries with elegance and precise facts in ${lang.toUpperCase()} language. Highlight the unique advantages of Ground-Floor living with private terrace opening directly to the resort garden areas and pools, immediate delivery, and the luxury amenities of Tulum Country Club. Always invite the client to book a private viewing or chat on WhatsApp with Jorge Sandoval.`;
 
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,

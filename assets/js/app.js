@@ -265,7 +265,7 @@
         objetivo: document.getElementById("form-interest").value,
         mensaje: document.getElementById("form-message").value.trim(),
         notificar_a: CONFIG.secondaryEmail,
-        propiedad: "Kaan-Ha Garden Residence (Planta Baja Reventa) - Tulum Country Club",
+        propiedad: "Kaan-Ha Residence (Planta Baja con Terraza) - Tulum Country Club",
         fecha: new Date().toISOString(),
         origen_url: window.location.href
       };
