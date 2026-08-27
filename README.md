@@ -61,17 +61,38 @@ Landing page de ultra-lujo desarrollada para **Kaan-Ha Residences** en **Tulum C
 
 ---
 
-## 3. Despliegue en Vercel
+## 3. Despliegue en Render.com (Recomendado)
 
-1. **Opción A: Vercel CLI (Recomendada)**:
+El repositorio incluye el archivo de infraestructura `render.yaml` listo para despliegue automático:
+
+1. **Opción A: Vía Blueprint (Automática)**:
+   - Inicia sesión en [dashboard.render.com](https://dashboard.render.com).
+   - Haz clic en **New +** y selecciona **Blueprint**.
+   - Conecta el repositorio: `gastonmorante/kaanhajorge`.
+   - Render leerá `render.yaml` y configurará el sitio estático con compresión y caché de activos al instante.
+   - Haz clic en **Apply**.
+
+2. **Opción B: Vía Static Site en Render Dashboard**:
+   - Inicia sesión en [dashboard.render.com](https://dashboard.render.com).
+   - Haz clic en **New +** y selecciona **Static Site**.
+   - Conecta el repositorio: `gastonmorante/kaanhajorge`.
+   - **Name**: `kaan-ha-luxury-landing` (o el nombre que prefieras).
+   - **Branch**: `main`.
+   - **Build Command**: *(Dejar en blanco)*.
+   - **Publish Directory**: `.`
+   - Haz clic en **Create Static Site**.
+   - En segundos tu sitio estará en vivo con HTTPS gratuito en una URL tipo `https://kaan-ha-luxury-landing.onrender.com`.
+
+---
+
+## 4. Despliegue en Vercel
+
+1. **Opción A: Vercel CLI**:
    ```bash
-   # En la carpeta del proyecto:
    npx vercel
    ```
 2. **Opción B: GitHub + Vercel Dashboard**:
-   - Crea un repositorio en GitHub.
-   - Sube los archivos del proyecto (excluyendo la carpeta pesada `kaanha/Videos` si supera el límite de 100MB de GitHub; para producción se recomienda alojar los videos en Cloudflare Stream, Vimeo OTT, BunnyCDN o Google Drive Stream).
-   - En [vercel.com](https://vercel.com), importa el repositorio y haz clic en **Deploy**. El archivo `vercel.json` configurará automáticamente las cabeceras de compresión y caché.
+   - En [vercel.com](https://vercel.com), importa el repositorio `gastonmorante/kaanhajorge` y haz clic en **Deploy**. El archivo `vercel.json` configurará automáticamente las cabeceras de compresión y caché.
 
 ---
 
