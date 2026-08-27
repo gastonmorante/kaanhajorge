@@ -1,6 +1,6 @@
 /**
  * KAAN-HA LUXURY RESIDENCES - CORE CONTROLLER
- * Handles i18n, video switching, GHL webhook, WhatsApp sync, 360 tour, and UI interactions.
+ * Handles i18n, bilingual video switching, GHL webhook, WhatsApp sync, 360 tour, luxury carousel, and UI interactions.
  */
 
 (function () {
@@ -8,23 +8,43 @@
   const CONFIG = {
     jorgePhone: "5216561436266",
     secondaryEmail: "jorgeasoti@yahoo.com",
-    brokerDriveUrl: "https://drive.google.com/drive/folders/1Iee16levvkNgKNrJGaGQ4NbdVySygIwg?usp=sharing",
+    brokerDriveUrl: "https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link",
     videosDriveUrl: "https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link",
     // Configurable GoHighLevel Webhook URL
     ghlWebhookUrl: "https://services.leadconnectorhq.com/hooks/catch/custom-kaan-ha-webhook",
-    // Local / CDN video paths
+    // Local / CDN fast-loading web video paths
     videoPaths: {
-      es: "kaanha/Videos/Kaanha esp.mp4",
-      en: "kaanha/Videos/KaanHa ing.mp4",
-      fr: "kaanha/Videos/KaanHa ing.mp4"
+      es: "assets/videos/kaan-ha-es.mp4",
+      en: "assets/videos/kaan-ha-en.mp4",
+      fr: "assets/videos/kaan-ha-en.mp4"
     }
   };
 
   let currentLang = "es";
 
+  // Gallery Slides Data (12 high-resolution curated photos)
+  const GALLERY_DATA = [
+    { id: 1, base: "gallery-01" },
+    { id: 2, base: "gallery-02" },
+    { id: 3, base: "gallery-03" },
+    { id: 4, base: "gallery-04" },
+    { id: 5, base: "gallery-05" },
+    { id: 6, base: "gallery-06" },
+    { id: 7, base: "gallery-07" },
+    { id: 8, base: "gallery-08" },
+    { id: 9, base: "gallery-09" },
+    { id: 10, base: "gallery-10" },
+    { id: 11, base: "gallery-11" },
+    { id: 12, base: "gallery-12" }
+  ];
+
+  let currentSlide = 0;
+
   // DOM Elements
   const heroVideo = document.getElementById("hero-video");
   const heroVideoSource = document.getElementById("hero-video-source");
+  const featuredVideo = document.getElementById("featured-video");
+  const featuredVideoSource = document.getElementById("featured-video-source");
   const floatingWaBtn = document.getElementById("floating-wa-btn");
   const leadForm = document.getElementById("lead-form");
   const langSelectors = document.querySelectorAll(".lang-btn");
@@ -45,24 +65,38 @@
   const mobileDrawerClose = document.getElementById("mobile-drawer-close");
   const conciergeMobileOverlay = document.getElementById("concierge-mobile-overlay");
 
-  // Initialize
+  // Carousel DOM Elements
+  const carouselTrack = document.getElementById("carousel-track");
+  const carouselPrev = document.getElementById("carousel-prev");
+  const carouselNext = document.getElementById("carousel-next");
+  const carouselCounter = document.getElementById("carousel-counter");
+  const carouselCaption = document.getElementById("carousel-caption");
+  const carouselDots = document.getElementById("carousel-dots");
+  const carouselExpandBtn = document.getElementById("carousel-expand-btn");
+
+  // Lightbox Modal
+  const galleryModal = document.getElementById("gallery-modal");
+  const galleryModalImg = document.getElementById("gallery-modal-img");
+  const galleryModalClose = document.getElementById("gallery-modal-close");
+
+  // Initialize on DOM Ready
   document.addEventListener("DOMContentLoaded", () => {
     initLanguage();
     initMobileDrawer();
-    initVideoPlayer();
+    initVideoPlayers();
     initWhatsAppLinks();
     initScrollEffects();
     initLeadForm();
     initConcierge();
-    init360Tour();
-    initGallery();
+    initCarousel();
+    initLightbox();
+    initBrokerLink();
   });
 
   /**
    * 1. LANGUAGE & I18N
    */
   function initLanguage() {
-    // Check saved preference or URL hash
     const saved = localStorage.getItem("kaan_ha_lang");
     const hash = window.location.hash.replace("#", "").toLowerCase();
 
@@ -71,7 +105,6 @@
     } else if (["es", "en", "fr"].includes(saved)) {
       currentLang = saved;
     } else {
-      // Detect browser language
       const navLang = (navigator.language || navigator.userLanguage || "es").toLowerCase();
       if (navLang.startsWith("fr")) currentLang = "fr";
       else if (navLang.startsWith("en")) currentLang = "en";
@@ -80,7 +113,6 @@
 
     setLanguage(currentLang, false);
 
-    // Bind language button clicks
     langSelectors.forEach(btn => {
       btn.addEventListener("click", (e) => {
         const lang = e.currentTarget.getAttribute("data-lang");
@@ -91,6 +123,22 @@
     });
   }
 
+  function setLanguage(lang, persist = true) {
+    currentLang = lang;
+    if (persist) {
+      localStorage.setItem("kaan_ha_lang", lang);
+    }
+
+    if (typeof window.translatePage === "function") {
+      window.translatePage(lang);
+    }
+
+    updateVideos(lang);
+    updateWhatsAppMessages(lang);
+    updateCarouselCaptions(lang);
+    refreshConciergeGreeting(lang);
+  }
+
   /**
    * 1.1 MOBILE MENU DRAWER
    */
@@ -99,116 +147,84 @@
 
     function openDrawer() {
       mobileDrawerOverlay.classList.remove("hidden");
-      mobileDrawer.classList.remove("drawer-closed");
-      mobileDrawer.classList.add("drawer-open");
-      document.body.classList.add("overflow-hidden");
+      setTimeout(() => {
+        mobileDrawerOverlay.classList.add("opacity-100");
+        mobileDrawer.classList.remove("drawer-closed");
+        mobileDrawer.classList.add("drawer-open");
+      }, 10);
+      document.body.style.overflow = "hidden";
     }
 
     function closeDrawer() {
-      mobileDrawerOverlay.classList.add("hidden");
       mobileDrawer.classList.remove("drawer-open");
       mobileDrawer.classList.add("drawer-closed");
-      document.body.classList.remove("overflow-hidden");
+      mobileDrawerOverlay.classList.remove("opacity-100");
+      setTimeout(() => {
+        mobileDrawerOverlay.classList.add("hidden");
+        document.body.style.overflow = "";
+      }, 300);
     }
 
     mobileMenuToggle.addEventListener("click", openDrawer);
     if (mobileDrawerClose) mobileDrawerClose.addEventListener("click", closeDrawer);
     mobileDrawerOverlay.addEventListener("click", closeDrawer);
 
-    // Close when clicking any link inside drawer
     document.querySelectorAll(".mobile-nav-link").forEach(link => {
-      link.addEventListener("click", closeDrawer);
+      link.addEventListener("click", () => {
+        closeDrawer();
+      });
     });
-  }
-
-  function setLanguage(lang, switchVideo = true) {
-    currentLang = lang;
-    localStorage.setItem("kaan_ha_lang", lang);
-
-    // Update active button classes
-    langSelectors.forEach(btn => {
-      const isSelected = btn.getAttribute("data-lang") === lang;
-      if (isSelected) {
-        btn.classList.add("bg-matte-gold", "text-deep-jungle", "font-bold");
-        btn.classList.remove("text-arena-chukum/70", "hover:text-white");
-      } else {
-        btn.classList.remove("bg-matte-gold", "text-deep-jungle", "font-bold");
-        btn.classList.add("text-arena-chukum/70", "hover:text-white");
-      }
-    });
-
-    const dict = window.I18N_DATA[lang] || window.I18N_DATA.es;
-
-    // Update text content with data-i18n
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (dict[key]) {
-        el.innerHTML = dict[key];
-      }
-    });
-
-    // Update input placeholders with data-i18n-placeholder
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      if (dict[key]) {
-        el.setAttribute("placeholder", dict[key]);
-      }
-    });
-
-    // Update form select preferred language value
-    const langSelect = document.getElementById("form-preferred-lang");
-    if (langSelect) {
-      langSelect.value = lang.toUpperCase();
-    }
-
-    // Update WhatsApp links
-    updateWhatsAppMessages(lang);
-
-    // Switch video if required
-    if (switchVideo) {
-      updateHeroVideo(lang);
-    }
-
-    // Refresh Concierge greeting
-    refreshConciergeGreeting(lang);
   }
 
   /**
-   * 2. VIDEO SWITCHER LOGIC
-   * Si Idioma = ES: Cargar Video Kaan Ha ES.mp4
-   * Si Idioma = EN o FR: Cargar Video Kaan Ha EN.mp4
+   * 2. BILINGUAL VIDEO LOGIC
+   * Spanish page (es) -> assets/videos/kaan-ha-es.mp4
+   * English/French page (en, fr) -> assets/videos/kaan-ha-en.mp4
    */
-  function initVideoPlayer() {
-    if (!heroVideo) return;
-    updateHeroVideo(currentLang);
+  function initVideoPlayers() {
+    updateVideos(currentLang);
   }
 
-  function updateHeroVideo(lang) {
-    if (!heroVideo || !heroVideoSource) return;
-
+  function updateVideos(lang) {
     const targetSrc = CONFIG.videoPaths[lang] || CONFIG.videoPaths.es;
-    const currentSrc = heroVideoSource.getAttribute("src");
 
-    if (currentSrc === targetSrc) return;
-
-    // Smooth transition
-    heroVideo.classList.add("opacity-60");
-    setTimeout(() => {
-      heroVideoSource.setAttribute("src", targetSrc);
-      heroVideo.load();
-      const playPromise = heroVideo.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            heroVideo.classList.remove("opacity-60");
-          })
-          .catch(err => {
-            // Autoplay policy or low power mode: keep poster crisp
-            console.info("Video autoplay waiting for interaction:", err);
-            heroVideo.classList.remove("opacity-60");
-          });
+    // 1. Update Hero Video Player
+    if (heroVideo && heroVideoSource) {
+      const currentHero = heroVideoSource.getAttribute("src");
+      if (currentHero !== targetSrc) {
+        heroVideo.classList.add("opacity-60");
+        setTimeout(() => {
+          heroVideoSource.setAttribute("src", targetSrc);
+          heroVideo.load();
+          const playPromise = heroVideo.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              heroVideo.classList.remove("opacity-60");
+            }).catch(err => {
+              console.info("Hero video autoplay waiting for user tap:", err);
+              heroVideo.classList.remove("opacity-60");
+            });
+          }
+        }, 200);
       }
-    }, 250);
+    }
+
+    // 2. Update Featured Section Video Player
+    if (featuredVideo && featuredVideoSource) {
+      const currentFeatured = featuredVideoSource.getAttribute("src");
+      if (currentFeatured !== targetSrc) {
+        const wasPlaying = !featuredVideo.paused;
+        const currentTime = featuredVideo.currentTime;
+        featuredVideoSource.setAttribute("src", targetSrc);
+        featuredVideo.load();
+        if (currentTime > 0) {
+          featuredVideo.currentTime = currentTime;
+        }
+        if (wasPlaying) {
+          featuredVideo.play().catch(() => {});
+        }
+      }
+    }
   }
 
   /**
@@ -220,14 +236,13 @@
 
   function updateWhatsAppMessages(lang) {
     const dict = window.I18N_DATA[lang] || window.I18N_DATA.es;
-    const message = dict.wa_message || "Hola Jorge, vi la propiedad Kaan-Ha en Tulum Country Club y me gustaría recibir el brochure completo y agendar una llamada privada.";
+    const message = dict.wa_message || "Hola Jorge, vi la reventa en planta baja de Kaan-Ha en Tulum Country Club y me gustar?a recibir los detalles completos y agendar una visita privada.";
     const waUrl = `https://wa.me/${CONFIG.jorgePhone}?text=${encodeURIComponent(message)}`;
 
     if (floatingWaBtn) {
       floatingWaBtn.setAttribute("href", waUrl);
     }
 
-    // Update all .wa-direct-link elements
     document.querySelectorAll(".wa-direct-link").forEach(btn => {
       btn.setAttribute("href", waUrl);
     });
@@ -238,7 +253,16 @@
   }
 
   /**
-   * 4. GOHIGHLEVEL WEBHOOK & EMAIL LEAD CAPTURE
+   * 4. BROKER LINK SETUP
+   */
+  function initBrokerLink() {
+    if (brokerPortalBtn) {
+      brokerPortalBtn.setAttribute("href", CONFIG.brokerDriveUrl);
+    }
+  }
+
+  /**
+   * 5. GOHIGHLEVEL WEBHOOK & EMAIL LEAD CAPTURE
    */
   function initLeadForm() {
     if (!leadForm) return;
@@ -256,266 +280,393 @@
         </svg> Procesando...
       `;
 
-      // Extract form data
       const formData = {
-        nombre: document.getElementById("form-name").value.trim(),
-        email: document.getElementById("form-email").value.trim(),
-        telefono: document.getElementById("form-phone").value.trim(),
-        idioma_preferencia: document.getElementById("form-preferred-lang").value,
-        objetivo: document.getElementById("form-interest").value,
-        mensaje: document.getElementById("form-message").value.trim(),
-        notificar_a: CONFIG.secondaryEmail,
-        propiedad: "Kaan-Ha Residence (Planta Baja con Terraza) - Tulum Country Club",
-        fecha: new Date().toISOString(),
-        origen_url: window.location.href
+        name: document.getElementById("form-name")?.value || document.getElementById("lead-name")?.value || "",
+        email: document.getElementById("form-email")?.value || document.getElementById("lead-email")?.value || "",
+        phone: document.getElementById("form-phone")?.value || document.getElementById("lead-phone")?.value || "",
+        preferred_language: document.getElementById("form-preferred-lang")?.value || document.getElementById("lead-lang")?.value || currentLang,
+        property: "Kaan-Ha Luxury Resale Planta Baja - 2 BR con Terraza",
+        property_price: "$536,000 USD (Reventa Planta Baja)",
+        location: "Tulum Country Club, Quintana Roo, M?xico",
+        broker_contact: "Jorge Sandoval (+52 1 656 143 6266)",
+        secondary_notification_email: CONFIG.secondaryEmail,
+        objective: document.getElementById("form-interest")?.value || document.getElementById("lead-interest")?.value || "Inversi?n Inmediata",
+        custom_notes: document.getElementById("form-message")?.value || document.getElementById("lead-message")?.value || "Solicitud de Ficha T?cnica y Cita VIP",
+        timestamp: new Date().toISOString(),
+        source: window.location.href,
+        referrer: document.referrer || "direct"
       };
 
-      // 1. Save lead in localStorage as reliable backup
-      try {
-        const storedLeads = JSON.parse(localStorage.getItem("kaan_ha_leads") || "[]");
-        storedLeads.push(formData);
-        localStorage.setItem("kaan_ha_leads", JSON.stringify(storedLeads));
-      } catch (err) {
-        console.warn("Storage err:", err);
-      }
-
-      // 2. Dispatch to GoHighLevel Webhook
       try {
         await fetch(CONFIG.ghlWebhookUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(formData),
-          mode: "no-cors" // Allow cross-origin dispatch to webhook receiver
+          headers: { "Content-Type": "application/json" },
+          mode: "no-cors",
+          body: JSON.stringify(formData)
         });
       } catch (err) {
-        console.warn("Webhook dispatched with non-blocking status:", err);
+        console.warn("GoHighLevel Webhook webhook send handled:", err);
       }
 
-      // 3. Prepare secondary mailto notification trigger
-      const mailtoSubject = encodeURIComponent(`Nuevo Lead Kaan-Ha: ${formData.nombre} (${formData.idioma_preferencia})`);
-      const mailtoBody = encodeURIComponent(
-        `Nombre: ${formData.nombre}\nEmail: ${formData.email}\nTeléfono: ${formData.telefono}\nIdioma: ${formData.idioma_preferencia}\nObjetivo: ${formData.objetivo}\nMensaje: ${formData.mensaje}\nFecha: ${formData.fecha}`
-      );
-      const secondaryMailtoUrl = `mailto:${CONFIG.secondaryEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
-      
-      // Store secondary mailto link in window
-      window.lastLeadMailto = secondaryMailtoUrl;
-
-      // Reset button
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
-      leadForm.reset();
 
-      // Show luxury confirmation modal
       if (successModal) {
         successModal.classList.remove("hidden");
         successModal.classList.add("flex");
       }
+
+      leadForm.reset();
     });
 
-    if (closeSuccessModal) {
+    if (closeSuccessModal && successModal) {
       closeSuccessModal.addEventListener("click", () => {
         successModal.classList.add("hidden");
         successModal.classList.remove("flex");
+      });
+
+      successModal.addEventListener("click", (e) => {
+        if (e.target === successModal) {
+          successModal.classList.add("hidden");
+          successModal.classList.remove("flex");
+        }
       });
     }
   }
 
   /**
-   * 5. AI CONCIERGE WIDGET
+   * 6. LUXURY CAROUSEL CONTROLLER
+   */
+  function initCarousel() {
+    if (!carouselTrack) return;
+
+    // 1. Build Slide Track Markup
+    carouselTrack.innerHTML = "";
+    GALLERY_DATA.forEach((item, index) => {
+      const slide = document.createElement("div");
+      slide.className = "w-full shrink-0 relative aspect-[16/10] sm:aspect-[16/9] bg-black/60 cursor-pointer overflow-hidden group";
+      slide.setAttribute("data-slide-index", index);
+
+      slide.innerHTML = `
+        <picture class="w-full h-full block">
+          <source srcset="assets/images/${item.base}.webp" type="image/webp">
+          <img src="assets/images/${item.base}.jpg" 
+               alt="Kaan-Ha Fotograf?a ${index + 1}" 
+               loading="${index === 0 ? 'eager' : 'lazy'}"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        </picture>
+        <div class="absolute inset-0 bg-gradient-to-t from-deep-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold/60 shadow-lg">
+            ?? Ampliar Imagen
+          </span>
+        </div>
+      `;
+
+      // Click to open lightbox
+      slide.addEventListener("click", () => {
+        openLightbox(index);
+      });
+
+      carouselTrack.appendChild(slide);
+    });
+
+    // 2. Build Pagination Dots
+    if (carouselDots) {
+      carouselDots.innerHTML = "";
+      GALLERY_DATA.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.setAttribute("aria-label", `Ir a fotograf?a ${index + 1}`);
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+          index === 0 ? "bg-matte-gold w-8" : "bg-arena-chukum/30 hover:bg-arena-chukum/60"
+        }`;
+        dot.addEventListener("click", () => {
+          goToSlide(index);
+        });
+        carouselDots.appendChild(dot);
+      });
+    }
+
+    // 3. Navigation Controls
+    if (carouselPrev) {
+      carouselPrev.addEventListener("click", () => {
+        goToSlide((currentSlide - 1 + GALLERY_DATA.length) % GALLERY_DATA.length);
+      });
+    }
+
+    if (carouselNext) {
+      carouselNext.addEventListener("click", () => {
+        goToSlide((currentSlide + 1) % GALLERY_DATA.length);
+      });
+    }
+
+    if (carouselExpandBtn) {
+      carouselExpandBtn.addEventListener("click", () => {
+        openLightbox(currentSlide);
+      });
+    }
+
+    // 4. Touch Gestures (Swipe)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carouselTrack.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carouselTrack.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const threshold = 40;
+      if (touchEndX < touchStartX - threshold) {
+        goToSlide((currentSlide + 1) % GALLERY_DATA.length);
+      } else if (touchEndX > touchStartX + threshold) {
+        goToSlide((currentSlide - 1 + GALLERY_DATA.length) % GALLERY_DATA.length);
+      }
+    }
+
+    // 5. Keyboard Navigation
+    document.addEventListener("keydown", (e) => {
+      const galSection = document.getElementById("galeria");
+      if (!galSection) return;
+      const rect = galSection.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView) {
+        if (e.key === "ArrowLeft") {
+          goToSlide((currentSlide - 1 + GALLERY_DATA.length) % GALLERY_DATA.length);
+        } else if (e.key === "ArrowRight") {
+          goToSlide((currentSlide + 1) % GALLERY_DATA.length);
+        }
+      }
+    });
+
+    goToSlide(0);
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    if (carouselTrack) {
+      carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Update Counter
+    if (carouselCounter) {
+      const num = String(currentSlide + 1).padStart(2, "0");
+      const total = String(GALLERY_DATA.length).padStart(2, "0");
+      carouselCounter.textContent = `${num} / ${total}`;
+    }
+
+    // Update Caption
+    updateCarouselCaptions(currentLang);
+
+    // Update Dots
+    if (carouselDots) {
+      const dots = carouselDots.querySelectorAll("button");
+      dots.forEach((dot, i) => {
+        if (i === currentSlide) {
+          dot.className = "w-8 h-2.5 rounded-full bg-matte-gold transition-all duration-300";
+        } else {
+          dot.className = "w-2.5 h-2.5 rounded-full bg-arena-chukum/30 hover:bg-arena-chukum/60 transition-all duration-300";
+        }
+      });
+    }
+  }
+
+  function updateCarouselCaptions(lang) {
+    if (!carouselCaption) return;
+    const dict = window.I18N_DATA[lang] || window.I18N_DATA.es;
+    const slides = dict.gallery_slides || [];
+    const text = slides[currentSlide] || `Fotograf?a ${currentSlide + 1}`;
+    carouselCaption.textContent = text;
+  }
+  window.updateCarouselCaptions = updateCarouselCaptions;
+
+  /**
+   * 7. LIGHTBOX CONTROLLER
+   */
+  function initLightbox() {
+    if (!galleryModal) return;
+
+    if (galleryModalClose) {
+      galleryModalClose.addEventListener("click", closeLightbox);
+    }
+
+    galleryModal.addEventListener("click", (e) => {
+      if (e.target === galleryModal) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !galleryModal.classList.contains("hidden")) {
+        closeLightbox();
+      }
+    });
+  }
+
+  function openLightbox(index) {
+    if (!galleryModal || !galleryModalImg) return;
+    const item = GALLERY_DATA[index];
+    if (!item) return;
+
+    galleryModalImg.setAttribute("src", `assets/images/${item.base}.webp`);
+    galleryModal.classList.remove("hidden");
+    galleryModal.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    if (!galleryModal) return;
+    galleryModal.classList.add("hidden");
+    galleryModal.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  /**
+   * 8. AI CONCIERGE CONTROLLER
    */
   function initConcierge() {
     if (!conciergeWidget || !conciergeToggle) return;
 
-    // Toggle chat visibility
+    let isOpen = false;
+
     function openConcierge() {
+      isOpen = true;
       conciergeWidget.classList.remove("hidden");
-      conciergeToggle.classList.add("scale-95");
-      if (conciergeMobileOverlay) conciergeMobileOverlay.classList.remove("hidden");
-      conciergeInput.focus();
-      scrollChatToBottom();
+      setTimeout(() => {
+        conciergeWidget.classList.add("widget-open");
+      }, 10);
+      if (window.innerWidth < 640 && conciergeMobileOverlay) {
+        conciergeMobileOverlay.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
     }
 
     function closeConcierge() {
-      conciergeWidget.classList.add("hidden");
-      conciergeToggle.classList.remove("scale-95");
-      if (conciergeMobileOverlay) conciergeMobileOverlay.classList.add("hidden");
+      isOpen = false;
+      conciergeWidget.classList.remove("widget-open");
+      if (conciergeMobileOverlay) {
+        conciergeMobileOverlay.classList.add("hidden");
+      }
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        if (!isOpen) conciergeWidget.classList.add("hidden");
+      }, 300);
     }
 
     conciergeToggle.addEventListener("click", () => {
-      if (conciergeWidget.classList.contains("hidden")) {
-        openConcierge();
-      } else {
-        closeConcierge();
-      }
+      if (isOpen) closeConcierge();
+      else openConcierge();
     });
 
-    if (conciergeClose) {
-      conciergeClose.addEventListener("click", closeConcierge);
-    }
-    if (conciergeMobileOverlay) {
-      conciergeMobileOverlay.addEventListener("click", closeConcierge);
-    }
+    if (conciergeClose) conciergeClose.addEventListener("click", closeConcierge);
+    if (conciergeMobileOverlay) conciergeMobileOverlay.addEventListener("click", closeConcierge);
 
-    // Handle form submit
-    if (conciergeForm) {
+    if (conciergeForm && conciergeInput) {
       conciergeForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const userText = conciergeInput.value.trim();
         if (!userText) return;
 
-        // Render user message
-        appendChatMessage("user", userText);
+        appendMessage("user", userText);
         conciergeInput.value = "";
 
-        // Render typing indicator
-        const typingId = showTypingIndicator();
-
-        // Query AI Concierge
+        const typingIndicator = appendTypingIndicator();
         try {
-          const aiResponse = await window.AI_CONCIERGE.sendMessage(userText, currentLang);
-          removeTypingIndicator(typingId);
-          appendChatMessage("model", aiResponse, true);
+          if (window.KaanHaConcierge && typeof window.KaanHaConcierge.query === "function") {
+            const reply = await window.KaanHaConcierge.query(userText, currentLang);
+            removeTypingIndicator(typingIndicator);
+            appendMessage("assistant", reply);
+          } else {
+            removeTypingIndicator(typingIndicator);
+            appendMessage("assistant", "Estoy a su entera disposici?n para facilitarle la ficha t?cnica de la residencia en Planta Baja con terraza hacia garden y albercas, o conectarle directamente con Jorge Sandoval por WhatsApp al +52 1 656 143 6266.");
+          }
         } catch (err) {
-          removeTypingIndicator(typingId);
-          appendChatMessage("model", "Disculpe, hubo un breve retraso en la conexión. Por favor permítanos asistirle directamente en WhatsApp con Jorge Sandoval.", false);
+          removeTypingIndicator(typingIndicator);
+          appendMessage("assistant", "Con gusto puedo brindarle informaci?n sobre la distribuci?n, la terraza privada y el club de golf PGA. ?Gusta que le enviemos el dossier por WhatsApp?");
         }
       });
     }
 
-    // Bind quick pill clicks
     if (quickPillsContainer) {
-      quickPillsContainer.addEventListener("click", (e) => {
-        const pill = e.target.closest("button");
-        if (!pill) return;
-        const query = pill.innerText.trim();
-        conciergeInput.value = query;
-        conciergeForm.dispatchEvent(new Event("submit"));
+      quickPillsContainer.querySelectorAll("button").forEach(pill => {
+        pill.addEventListener("click", () => {
+          const text = pill.textContent.trim();
+          if (conciergeInput) {
+            conciergeInput.value = text;
+            conciergeForm.dispatchEvent(new Event("submit"));
+          }
+        });
       });
+    }
+  }
+
+  function appendMessage(sender, text) {
+    if (!conciergeMessages) return;
+
+    const row = document.createElement("div");
+    row.className = `flex ${sender === "user" ? "justify-end" : "justify-start"} mb-3`;
+
+    const bubble = document.createElement("div");
+    bubble.className = sender === "user"
+      ? "max-w-[85%] bg-matte-gold text-deep-jungle font-medium text-xs sm:text-sm rounded-2xl rounded-br-xs px-4 py-2.5 shadow-md"
+      : "max-w-[85%] bg-deep-jungle/90 border border-matte-gold/30 text-arena-chukum text-xs sm:text-sm rounded-2xl rounded-bl-xs px-4 py-2.5 shadow-md leading-relaxed";
+
+    bubble.innerHTML = text.replace(/\n/g, "<br>");
+    row.appendChild(bubble);
+    conciergeMessages.appendChild(row);
+    conciergeMessages.scrollTop = conciergeMessages.scrollHeight;
+  }
+
+  function appendTypingIndicator() {
+    if (!conciergeMessages) return null;
+    const row = document.createElement("div");
+    row.className = "flex justify-start mb-3 typing-indicator-row";
+    row.innerHTML = `
+      <div class="bg-deep-jungle/80 border border-matte-gold/20 text-arena-chukum rounded-2xl px-3 py-2 flex items-center gap-1 text-xs">
+        <span class="w-1.5 h-1.5 rounded-full bg-matte-gold animate-ping"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-matte-gold animate-ping" style="animation-delay: 0.2s"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-matte-gold animate-ping" style="animation-delay: 0.4s"></span>
+      </div>
+    `;
+    conciergeMessages.appendChild(row);
+    conciergeMessages.scrollTop = conciergeMessages.scrollHeight;
+    return row;
+  }
+
+  function removeTypingIndicator(indicator) {
+    if (indicator && indicator.parentNode) {
+      indicator.parentNode.removeChild(indicator);
     }
   }
 
   function refreshConciergeGreeting(lang) {
+    const greetingEl = document.getElementById("concierge-initial-msg");
+    if (!greetingEl) return;
     const dict = window.I18N_DATA[lang] || window.I18N_DATA.es;
-    const initialMsgEl = document.getElementById("concierge-initial-msg");
-    if (initialMsgEl && dict.ai_greeting) {
-      initialMsgEl.innerText = dict.ai_greeting;
-    }
-
-    // Update quick pills
-    if (quickPillsContainer) {
-      quickPillsContainer.innerHTML = `
-        <button type="button" class="text-xs px-2.5 py-1 rounded-full bg-deep-jungle/60 hover:bg-matte-gold hover:text-deep-jungle text-arena-chukum border border-matte-gold/30 transition-all text-left whitespace-nowrap">${dict.ai_quick_1}</button>
-        <button type="button" class="text-xs px-2.5 py-1 rounded-full bg-deep-jungle/60 hover:bg-matte-gold hover:text-deep-jungle text-arena-chukum border border-matte-gold/30 transition-all text-left whitespace-nowrap">${dict.ai_quick_2}</button>
-        <button type="button" class="text-xs px-2.5 py-1 rounded-full bg-deep-jungle/60 hover:bg-matte-gold hover:text-deep-jungle text-arena-chukum border border-matte-gold/30 transition-all text-left whitespace-nowrap">${dict.ai_quick_3}</button>
-        <button type="button" class="text-xs px-2.5 py-1 rounded-full bg-deep-jungle/60 hover:bg-matte-gold hover:text-deep-jungle text-arena-chukum border border-matte-gold/30 transition-all text-left whitespace-nowrap">${dict.ai_quick_4}</button>
-      `;
-    }
-  }
-
-  function appendChatMessage(sender, htmlOrText, isHtml = false) {
-    if (!conciergeMessages) return;
-
-    const msgWrapper = document.createElement("div");
-    msgWrapper.className = sender === "user" 
-      ? "flex justify-end mb-3" 
-      : "flex justify-start mb-3";
-
-    const bubble = document.createElement("div");
-    if (sender === "user") {
-      bubble.className = "max-w-[82%] bg-matte-gold text-deep-dark text-sm rounded-2xl rounded-br-xs px-4 py-2.5 shadow-md";
-      bubble.textContent = htmlOrText;
-    } else {
-      bubble.className = "max-w-[85%] bg-deep-jungle/90 border border-matte-gold/30 text-arena-chukum text-sm rounded-2xl rounded-bl-xs px-4 py-3 shadow-lg";
-      if (isHtml) {
-        bubble.innerHTML = htmlOrText;
-      } else {
-        bubble.textContent = htmlOrText;
-      }
-    }
-
-    msgWrapper.appendChild(bubble);
-    conciergeMessages.appendChild(msgWrapper);
-    scrollChatToBottom();
-  }
-
-  function showTypingIndicator() {
-    const id = "typing-" + Date.now();
-    const typingWrapper = document.createElement("div");
-    typingWrapper.id = id;
-    typingWrapper.className = "flex justify-start mb-3";
-    typingWrapper.innerHTML = `
-      <div class="bg-deep-jungle/80 border border-matte-gold/20 rounded-2xl px-4 py-2.5 flex items-center space-x-1.5">
-        <span class="w-2 h-2 rounded-full bg-matte-gold typing-dot"></span>
-        <span class="w-2 h-2 rounded-full bg-matte-gold typing-dot"></span>
-        <span class="w-2 h-2 rounded-full bg-matte-gold typing-dot"></span>
-      </div>
-    `;
-    conciergeMessages.appendChild(typingWrapper);
-    scrollChatToBottom();
-    return id;
-  }
-
-  function removeTypingIndicator(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-  }
-
-  function scrollChatToBottom() {
-    if (conciergeMessages) {
-      conciergeMessages.scrollTop = conciergeMessages.scrollHeight;
+    if (dict.ai_greeting) {
+      greetingEl.textContent = dict.ai_greeting;
     }
   }
 
   /**
-   * 6. CLOUDPANO 360 TOUR
-   */
-  function init360Tour() {
-    // CloudPano embed script is already declared in HTML
-    // We also provide smooth lazy loading and interactive controls
-    const tourContainer = document.getElementById("5kEjo0NdT");
-    if (tourContainer) {
-      // Check if script ran; if not, ensure iframe fallback is loaded gracefully
-      setTimeout(() => {
-        const iframe = tourContainer.querySelector("iframe");
-        if (!iframe) {
-          // Fallback iframe for instant 360 viewer
-          const fbIframe = document.createElement("iframe");
-          fbIframe.src = "https://app.cloudpano.com/tours/5kEjo0NdT";
-          fbIframe.width = "100%";
-          fbIframe.setAttribute("frameborder", "0");
-          fbIframe.setAttribute("allowfullscreen", "true");
-          fbIframe.setAttribute("allow", "xr-spatial-tracking; accelerometer; gyroscope");
-          fbIframe.className = "w-full h-[380px] sm:h-[460px] md:h-[520px] rounded-xl border border-matte-gold/20 shadow-2xl";
-          tourContainer.appendChild(fbIframe);
-        }
-      }, 2500);
-    }
-  }
-
-  /**
-   * 7. SCROLL EFFECTS & PARALLAX
+   * 9. SCROLL REVEAL & PARALLAX
    */
   function initScrollEffects() {
-    // Reveal on scroll using IntersectionObserver
     const reveals = document.querySelectorAll(".reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.12 });
 
     reveals.forEach(el => observer.observe(el));
 
-    // Parallax on Hero
     const heroBg = document.querySelector(".hero-parallax-bg");
     if (heroBg) {
       window.addEventListener("scroll", () => {
@@ -525,43 +676,6 @@
         }
       }, { passive: true });
     }
-  }
-
-  /**
-   * 8. GALLERY LIGHTBOX
-   */
-  function initGallery() {
-    const galleryItems = document.querySelectorAll(".gallery-card");
-    const modal = document.getElementById("gallery-modal");
-    const modalImg = document.getElementById("gallery-modal-img");
-    const modalClose = document.getElementById("gallery-modal-close");
-
-    if (!modal || !modalImg) return;
-
-    galleryItems.forEach(item => {
-      item.addEventListener("click", () => {
-        const imgSrc = item.getAttribute("data-full-img");
-        if (imgSrc) {
-          modalImg.setAttribute("src", imgSrc);
-          modal.classList.remove("hidden");
-          modal.classList.add("flex");
-        }
-      });
-    });
-
-    if (modalClose) {
-      modalClose.addEventListener("click", () => {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-      });
-    }
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-      }
-    });
   }
 
 })();

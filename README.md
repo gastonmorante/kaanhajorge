@@ -8,7 +8,7 @@ Landing page de ultra-lujo desarrollada para la **Reventa Exclusiva de una Resid
 ## 1. Características Principales
 
 - **Posicionamiento Comercial Focalizado (Reventa en Planta Baja con Terraza)**:
-  - Enfoque exclusivo en la unidad en Planta Baja: amplia terraza privada apergolada con salida directa a la parte garden y albercas del proyecto, vistas frontales al campo de golf PGA Riviera Maya y entrega inmediata.
+  - Enfoque exclusivo en la unidad en Planta Baja: amplia terraza privada con salida directa a la parte garden y albercas del proyecto, vistas frontales al campo de golf PGA Riviera Maya y entrega inmediata.
   - Precio de oportunidad cerrado: **$536,000 USD** (unidad lista llave en mano).
 - **Estética "Organic Quiet Luxury"**:
   - Paleta auténtica: `arena-chukum` (`#E5D3B3`), `deep-jungle` (`#1B3022`), `matte-gold` (`#A68966`) y contraste en `deep-dark` (`#0D1912`).

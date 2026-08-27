@@ -12,7 +12,7 @@
   <meta name="format-detection" content="telephone=no">
   
   <!-- Preload LCP Hero Poster Image for Instant Rendering -->
-  <link rel="preload" as="image" href="assets/images/hero-poster.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/hero-poster.webp" type="image/webp" fetchpriority="high">
 
   <!-- Google Fonts: EB Garamond (Titles) & Inter (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,10 +64,12 @@
       </a>
 
       <!-- Desktop Navigation Links -->
-      <nav class="hidden md:flex items-center space-x-8 text-xs tracking-widest uppercase font-medium">
+      <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs tracking-widest uppercase font-medium">
         <a href="#propiedad" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_property">La Residencia</a>
-        <a href="#amenidades" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_amenities">Amenidades PGA</a>
+        <a href="#video" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_video">Video</a>
         <a href="#tour360" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_tour">Tour 360°</a>
+        <a href="#galeria" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_gallery">Galería de Fotos</a>
+        <a href="#amenidades" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_amenities">Amenidades PGA</a>
         <a href="#ubicacion" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_location">Ubicación</a>
         <a href="#contacto" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_contact">Contacto</a>
       </nav>
@@ -126,12 +128,20 @@
           <span data-i18n="nav_property">La Residencia</span>
           <span class="text-matte-gold/50">›</span>
         </a>
-        <a href="#amenidades" class="mobile-nav-link flex items-center justify-between py-3.5 px-3 rounded-xl text-sm tracking-wider uppercase font-medium text-arena-chukum hover:bg-deep-jungle/60 hover:text-matte-gold transition-colors">
-          <span data-i18n="nav_amenities">Amenidades PGA</span>
+        <a href="#video" class="mobile-nav-link flex items-center justify-between py-3.5 px-3 rounded-xl text-sm tracking-wider uppercase font-medium text-arena-chukum hover:bg-deep-jungle/60 hover:text-matte-gold transition-colors">
+          <span data-i18n="nav_video">Video</span>
           <span class="text-matte-gold/50">›</span>
         </a>
         <a href="#tour360" class="mobile-nav-link flex items-center justify-between py-3.5 px-3 rounded-xl text-sm tracking-wider uppercase font-medium text-arena-chukum hover:bg-deep-jungle/60 hover:text-matte-gold transition-colors">
           <span data-i18n="nav_tour">Tour 360°</span>
+          <span class="text-matte-gold/50">›</span>
+        </a>
+        <a href="#galeria" class="mobile-nav-link flex items-center justify-between py-3.5 px-3 rounded-xl text-sm tracking-wider uppercase font-medium text-arena-chukum hover:bg-deep-jungle/60 hover:text-matte-gold transition-colors">
+          <span data-i18n="nav_gallery">Galería de Fotos</span>
+          <span class="text-matte-gold/50">›</span>
+        </a>
+        <a href="#amenidades" class="mobile-nav-link flex items-center justify-between py-3.5 px-3 rounded-xl text-sm tracking-wider uppercase font-medium text-arena-chukum hover:bg-deep-jungle/60 hover:text-matte-gold transition-colors">
+          <span data-i18n="nav_amenities">Amenidades PGA</span>
           <span class="text-matte-gold/50">›</span>
         </a>
         <a href="#ubicacion" class="mobile-nav-link flex items-center justify-between py-3.5 px-3 rounded-xl text-sm tracking-wider uppercase font-medium text-arena-chukum hover:bg-deep-jungle/60 hover:text-matte-gold transition-colors">
@@ -180,9 +190,9 @@
              loop
              playsinline
              preload="auto"
-             poster="assets/images/hero-poster.jpg"
+             poster="assets/images/hero-poster.webp"
              class="w-full h-full object-cover transition-opacity duration-700">
-        <source id="hero-video-source" src="kaanha/Videos/Kaanha esp.mp4" type="video/mp4">
+        <source id="hero-video-source" src="assets/videos/kaan-ha-es.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
 
@@ -225,37 +235,12 @@
         </a>
       </div>
 
-      <!-- Quick Highlights Pills -->
-      <div class="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[11px] sm:text-xs tracking-wider text-arena-chukum/75">
-        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-deep-jungle/40 border border-matte-gold/20">
-          <svg class="w-3.5 h-3.5 text-matte-gold shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span data-i18n="hero_badge_ground">Planta Baja con Terraza hacia Garden & Albercas</span>
-        </div>
-        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-deep-jungle/40 border border-matte-gold/20">
-          <svg class="w-3.5 h-3.5 text-matte-gold shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span data-i18n="hero_badge_plunge">Terraza Privada Apergolada</span>
-        </div>
-        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-deep-jungle/40 border border-matte-gold/20">
-          <svg class="w-3.5 h-3.5 text-matte-gold shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span data-i18n="hero_badge_golf">Campo de Golf PGA 18+9 Hoyos</span>
-        </div>
-        <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-deep-jungle/40 border border-matte-gold/20">
-          <svg class="w-3.5 h-3.5 text-matte-gold shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-          <span data-i18n="hero_badge_security">Seguridad Privada 24/7</span>
-        </div>
       </div>
 
-    </div>
-
-    <!-- Glassmorphic Key Metrics Strip (Bottom of Hero) -->
+    <!-- Glassmorphic Key Metrics Strip (Bottom of Hero - 3 Balanced Columns) -->
     <div class="absolute bottom-0 left-0 right-0 z-20 border-t border-matte-gold/20 bg-deep-dark/90 backdrop-blur-md">
-      <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3.5 sm:py-5 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-5 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 text-center">
         
-        <div class="p-1">
-          <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium" data-i18n="metric_price_label">Precio de Reventa</p>
-          <p class="font-serif text-base sm:text-xl md:text-2xl text-arena-chukum font-normal mt-0.5" data-i18n="metric_price_val">$536,000 USD</p>
-        </div>
-
         <div class="p-1">
           <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium" data-i18n="metric_typology_label">Nivel & Distribución</p>
           <p class="font-serif text-base sm:text-xl md:text-2xl text-arena-chukum font-normal mt-0.5" data-i18n="metric_typology_val">Planta Baja · 2 Recámaras</p>
@@ -388,7 +373,7 @@
 
             <div class="p-4 rounded-xl glass-panel-light border border-matte-gold/20 flex items-center gap-3">
               <svg class="w-5 h-5 text-matte-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-              <span class="text-xs text-arena-chukum" data-i18n="specs_garden">Amplia terraza privada apergolada con salida a la zona garden y albercas</span>
+              <span class="text-xs text-arena-chukum" data-i18n="specs_garden">Amplia terraza privada con salida directa a la zona garden y albercas</span>
             </div>
 
             <div class="p-4 rounded-xl glass-panel-light border border-matte-gold/20 flex items-center gap-3">
@@ -406,9 +391,58 @@
   </section>
 
   <!-- =========================================================================
-       6. INTERACTIVE 360 VIRTUAL TOUR (CLOUDPANO REAL EMBED)
+       5. CINEMATIC VIDEO PRESENTATION (BILINGUAL NATIVE STREAM)
        ========================================================================= -->
-  <section id="tour360" class="py-28 relative bg-gradient-to-b from-deep-dark via-deep-jungle/25 to-deep-dark border-b border-matte-gold/15">
+  <section id="video" class="py-24 relative bg-gradient-to-b from-deep-dark via-deep-jungle/20 to-deep-dark border-b border-matte-gold/15">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+        <div class="inline-flex items-center gap-2 mb-3">
+          <span class="w-6 h-px bg-matte-gold"></span>
+          <span class="text-xs uppercase tracking-[0.25em] text-matte-gold font-semibold" data-i18n="video_tag">Cinematografía Inmobiliaria</span>
+          <span class="w-6 h-px bg-matte-gold"></span>
+        </div>
+        <h2 class="font-serif text-3xl sm:text-5xl text-ivory-white mb-4" data-i18n="video_title">
+          Video Presentación Exclusiva
+        </h2>
+        <p class="text-arena-chukum/80 font-light" data-i18n="video_desc">
+          Recorra en alta definición los espacios interiores, la amplia terraza privada y el entorno del desarrollo.
+        </p>
+      </div>
+
+      <!-- Video Player Frame -->
+      <div class="max-w-5xl mx-auto rounded-2xl overflow-hidden glass-panel border border-matte-gold/40 shadow-2xl p-2 sm:p-4 reveal">
+        <div class="relative aspect-video w-full rounded-xl overflow-hidden bg-black/60 shadow-inner">
+          <video id="featured-video"
+                 controls
+                 playsinline
+                 preload="metadata"
+                 poster="assets/images/hero-poster.webp"
+                 class="w-full h-full object-cover">
+            <source id="featured-video-source" src="assets/videos/kaan-ha-es.mp4" type="video/mp4">
+            Su navegador no soporta la reproducción de video.
+          </video>
+        </div>
+
+        <!-- Video Info & CTA -->
+        <div class="mt-4 pt-4 border-t border-matte-gold/20 flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
+          <div class="flex items-center gap-2 text-xs text-arena-chukum/80">
+            <span class="w-2 h-2 rounded-full bg-matte-gold animate-pulse"></span>
+            <span data-i18n="video_note">Recorrido oficial con narración guiada por Jorge Sandoval.</span>
+          </div>
+          <a href="#contacto" class="wa-direct-link inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-deep-jungle bg-matte-gold hover:bg-arena-chukum px-5 py-2.5 rounded-full transition-all shadow-md">
+            <span data-i18n="video_cta">Solicitar Asesoría Personalizada</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. INTERACTIVE 360 VIRTUAL TOUR (CLOUDPANO DEDUPLICATED EMBED)
+       ========================================================================= -->
+  <section id="tour360" class="py-24 sm:py-28 relative bg-deep-dark border-b border-matte-gold/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-12 reveal">
@@ -421,16 +455,21 @@
           Recorrido Virtual 360° Kaan-Ha
         </h2>
         <p class="text-arena-chukum/80 font-light" data-i18n="tour_desc">
-          Explore cada rincón de la residencia piloto, sus espacios fluidos y sus perspectivas privilegiadas hacia el campo de golf.
+          Explore cada rincón de la residencia, sus espacios fluidos y sus perspectivas privilegiadas hacia la terraza, áreas garden y el campo de golf.
         </p>
       </div>
 
-      <!-- Real CloudPano Inserción Oficial Container -->
+      <!-- CloudPano Real Embed (Single Iframe, Zero Duplicates) -->
       <div class="max-w-5xl mx-auto rounded-2xl overflow-hidden glass-panel border border-matte-gold/40 shadow-2xl p-2 sm:p-4 reveal">
         
-        <!-- CloudPano Script Container -->
-        <div id="5kEjo0NdT" class="w-full relative min-h-[380px] sm:min-h-[460px] md:min-h-[520px] rounded-xl overflow-hidden bg-black/40">
-          <script type="text/javascript" async data-short="5kEjo0NdT" data-path="tours" data-is-self-hosted="false" width="100%" height="500px" src="https://app.cloudpano.com/public/shareScript.js"></script>
+        <div class="w-full relative min-h-[420px] sm:min-h-[500px] md:min-h-[580px] rounded-xl overflow-hidden bg-black/40">
+          <iframe id="cloudpano-iframe" 
+                  src="https://app.cloudpano.com/tours/5kEjo0NdT" 
+                  class="w-full h-[420px] sm:h-[500px] md:h-[580px] rounded-xl border border-matte-gold/20 shadow-2xl" 
+                  frameborder="0" 
+                  allowfullscreen 
+                  loading="lazy"
+                  allow="xr-spatial-tracking; accelerometer; gyroscope"></iframe>
         </div>
 
         <!-- Help bar & Live agent CTA -->
@@ -546,68 +585,64 @@
   </section>
 
   <!-- =========================================================================
-       8. CURATED HIGH-RESOLUTION GALLERY
+       8. LUXURY INTERACTIVE PHOTO CAROUSEL
        ========================================================================= -->
-  <section class="py-28 relative bg-gradient-to-b from-deep-dark via-deep-jungle/20 to-deep-dark border-b border-matte-gold/15">
+  <section id="galeria" class="py-24 relative bg-deep-dark border-b border-matte-gold/15">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal">
         <div class="inline-flex items-center gap-2 mb-3">
           <span class="w-6 h-px bg-matte-gold"></span>
-          <span class="text-xs uppercase tracking-[0.25em] text-matte-gold font-semibold" data-i18n="gallery_tag">Galería Visual</span>
+          <span class="text-xs uppercase tracking-[0.25em] text-matte-gold font-semibold" data-i18n="gallery_tag">Galería Fotográfica</span>
           <span class="w-6 h-px bg-matte-gold"></span>
         </div>
         <h2 class="font-serif text-3xl sm:text-5xl text-ivory-white mb-4" data-i18n="gallery_title">
           Perspectivas de Kaan-Ha
         </h2>
         <p class="text-arena-chukum/80 font-light" data-i18n="gallery_subtitle">
-          Un vistazo a la atmósfera de serenidad, acabados artesanales y luz natural.
+          Deslice para explorar los acabados de autor, la terraza privada y las amenidades exclusivas.
         </p>
       </div>
 
-      <!-- Image Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Luxury Carousel Container -->
+      <div class="relative max-w-5xl mx-auto reveal">
         
-        <div class="gallery-card relative rounded-xl overflow-hidden border border-matte-gold/20 cursor-pointer group h-72 reveal" data-full-img="assets/images/gallery-01.jpg">
-          <img src="assets/images/gallery-01.jpg" alt="Kaan-Ha Exterior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
-          <div class="absolute inset-0 bg-deep-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold">Ampliar</span>
+        <!-- Carousel Frame -->
+        <div class="relative overflow-hidden rounded-2xl border border-matte-gold/35 shadow-2xl bg-black/40">
+          
+          <!-- Slide Track -->
+          <div id="carousel-track" class="flex transition-transform duration-500 ease-out">
+            <!-- Slides dynamically populated with WebP & JPG fallback by app.js -->
           </div>
+
+          <!-- Carousel Navigation Controls -->
+          <button id="carousel-prev" type="button" aria-label="Fotografía anterior" 
+                  class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel-gold border border-matte-gold/60 text-arena-chukum hover:text-deep-jungle hover:bg-matte-gold flex items-center justify-center transition-all shadow-xl z-20 active:scale-95">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button id="carousel-next" type="button" aria-label="Fotografía siguiente" 
+                  class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full glass-panel-gold border border-matte-gold/60 text-arena-chukum hover:text-deep-jungle hover:bg-matte-gold flex items-center justify-center transition-all shadow-xl z-20 active:scale-95">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <!-- Caption & Counter Bar -->
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 sm:p-6 flex items-center justify-between text-xs sm:text-sm text-arena-chukum z-10 pointer-events-none">
+            <div class="flex items-center gap-3">
+              <span id="carousel-counter" class="font-mono text-matte-gold font-bold tracking-wider text-xs sm:text-sm">01 / 12</span>
+              <span class="w-px h-4 bg-matte-gold/30"></span>
+              <span id="carousel-caption" class="font-medium text-ivory-white text-xs sm:text-sm truncate max-w-[200px] sm:max-w-md">Sala Principal con Vista a Terraza</span>
+            </div>
+            <button id="carousel-expand-btn" type="button" class="pointer-events-auto inline-flex items-center gap-1.5 text-xs text-matte-gold hover:text-white px-3 py-1.5 rounded-full glass-panel border border-matte-gold/40 transition-colors shadow-md">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+              <span class="hidden sm:inline" data-i18n="gallery_expand">Pantalla Completa</span>
+            </button>
+          </div>
+
         </div>
 
-        <div class="gallery-card relative rounded-xl overflow-hidden border border-matte-gold/20 cursor-pointer group h-72 reveal reveal-delay-1" data-full-img="assets/images/gallery-04.jpg">
-          <img src="assets/images/gallery-04.jpg" alt="Interior Living Chukum" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
-          <div class="absolute inset-0 bg-deep-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold">Ampliar</span>
-          </div>
-        </div>
-
-        <div class="gallery-card relative rounded-xl overflow-hidden border border-matte-gold/20 cursor-pointer group h-72 reveal reveal-delay-2" data-full-img="assets/images/gallery-05.jpg">
-          <img src="assets/images/gallery-05.jpg" alt="Terraza & Plunge Pool" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
-          <div class="absolute inset-0 bg-deep-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold">Ampliar</span>
-          </div>
-        </div>
-
-        <div class="gallery-card relative rounded-xl overflow-hidden border border-matte-gold/20 cursor-pointer group h-72 reveal" data-full-img="assets/images/gallery-06.jpg">
-          <img src="assets/images/gallery-06.jpg" alt="Recámara Principal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
-          <div class="absolute inset-0 bg-deep-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold">Ampliar</span>
-          </div>
-        </div>
-
-        <div class="gallery-card relative rounded-xl overflow-hidden border border-matte-gold/20 cursor-pointer group h-72 reveal reveal-delay-1" data-full-img="assets/images/gallery-07.jpg">
-          <img src="assets/images/gallery-07.jpg" alt="Baño Spa Chukum" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
-          <div class="absolute inset-0 bg-deep-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold">Ampliar</span>
-          </div>
-        </div>
-
-        <div class="gallery-card relative rounded-xl overflow-hidden border border-matte-gold/20 cursor-pointer group h-72 reveal reveal-delay-2" data-full-img="assets/images/gallery-08.jpg">
-          <img src="assets/images/gallery-08.jpg" alt="Vistas al Campo de Golf" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
-          <div class="absolute inset-0 bg-deep-dark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold">Ampliar</span>
-          </div>
+        <!-- Pagination Dots -->
+        <div id="carousel-dots" class="flex items-center justify-center gap-2 mt-6">
+          <!-- Dots generated by app.js -->
         </div>
 
       </div>
@@ -802,7 +837,7 @@
           <p class="text-xs text-arena-chukum/70 mb-4" data-i18n="footer_broker_desc">
             Descargue materiales en alta resolución, fichas técnicas y kits de ventas en Google Drive.
           </p>
-          <a id="broker-portal-btn" href="https://drive.google.com/drive/folders/1Iee16levvkNgKNrJGaGQ4NbdVySygIwg?usp=sharing" target="_blank" rel="noopener noreferrer" 
+          <a id="broker-portal-btn" href="https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link" target="_blank" rel="noopener noreferrer" 
              class="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold text-deep-jungle bg-matte-gold hover:bg-arena-chukum px-4 py-2 rounded-full transition-all">
             <svg class="w-4 h-4 fill-none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             <span data-i18n="footer_broker_btn">Acceder a la Carpeta de Brokers</span>
