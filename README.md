@@ -1,12 +1,15 @@
-# Kaan-Ha Luxury Residences | Tulum Country Club
-### Landing Page Trilingüe (ES | EN | FR) · "Organic Quiet Luxury"
+# Kaan-Ha Garden Residence | Tulum Country Club
+### Reventa Exclusiva en Planta Baja · Landing Page Trilingüe (ES | EN | FR)
 
-Landing page de ultra-lujo desarrollada para **Kaan-Ha Residences** en **Tulum Country Club (Bahia Principe Residences)**, optimizada para conversiones de alto valor patrimonial y conectada al ecosistema de ventas de Jorge Sandoval.
+Landing page de ultra-lujo desarrollada para la **Reventa Exclusiva de una Residencia en Planta Baja (Garden Residence con Alberca Privada y Jardín)** en **Kaan-Ha @ Tulum Country Club (Bahia Principe Residences)**. Diseñada para venta directa con entrega inmediata ($536,000 USD), conectada al ecosistema comercial de Jorge Sandoval (WhatsApp, GoHighLevel, IA).
 
 ---
 
 ## 1. Características Principales
 
+- **Posicionamiento Comercial Focalizado (Reventa en Planta Baja)**:
+  - Enfoque exclusivo en la unidad en Planta Baja: jardín privado, alberca plunge pool integrada, vistas frontales al campo de golf PGA Riviera Maya y entrega inmediata.
+  - Precio de oportunidad cerrado: **$536,000 USD** (eliminada cualquier referencia a preventa genérica de 50 residencias).
 - **Estética "Organic Quiet Luxury"**:
   - Paleta auténtica: `arena-chukum` (`#E5D3B3`), `deep-jungle` (`#1B3022`), `matte-gold` (`#A68966`) y contraste en `deep-dark` (`#0D1912`).
   - Tipografías: **EB Garamond** (títulos editoriales) e **Inter** (cuerpo y especificaciones técnicas).
@@ -31,9 +34,9 @@ Landing page de ultra-lujo desarrollada para **Kaan-Ha Residences** en **Tulum C
     - Almacenamiento de respaldo en `localStorage`.
     - Modal de confirmación con invitación directa a continuar en WhatsApp.
 - **Agente Concierge de IA Kaan-Ha**:
-  - Widget flotante interactivo en la esquina inferior izquierda.
-  - Integrado con la API Key proporcionada para Google Gemini con prompt de sistema especializado.
-  - Motor de respaldo local ultrarrápido con base de conocimiento de Tulum Country Club (PGA Golf, Beach Club, Lock-Off, Alberca Privada, Seguridad 24/7 y Precios desde $536,000 USD).
+  - Widget flotante interactivo en la esquina inferior izquierda (en móviles se convierte en un Bottom Sheet nativo).
+  - Integrado con la API Key proporcionada para Google Gemini con prompt de sistema especializado en la reventa en Planta Baja.
+  - Motor de respaldo local ultrarrápido con base de conocimiento de Tulum Country Club (PGA Golf, Beach Club, Lock-Off en Planta Baja, Alberca Privada, Jardín, Seguridad 24/7 y precio de $536,000 USD con entrega inmediata).
 
 ---
 
