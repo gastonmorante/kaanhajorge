@@ -1,0 +1,28 @@
+# Large Media Files (> 100MB rejected by GitHub)
+kaanha/Videos/
+kaanha/Pictures Exported/
+kaanha/Fotos 360/
+kaanha/Fotos para editar/
+kaanha/Insta360/
+kaanha/Osmo/
+kaanha/tomas extras/
+kaanha/voz/
+*.mp4
+*.mp3
+
+# Adobe Premiere Pro & Video Editing Scratch Files
+Adobe Premiere Pro Audio Previews/
+Adobe Premiere Pro Auto-Save/
+*.prproj
+*.prin
+*.PRV
+
+# Raw Projects
+Amira/
+
+# OS & Environment
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+.env.local

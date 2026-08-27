@@ -1,0 +1,19 @@
+{
+  "name": "kaan-ha-luxury-landing",
+  "version": "1.0.0",
+  "description": "Ultra-Luxury Trilingual Landing Page for Kaan-Ha Residences @ Tulum Country Club",
+  "main": "index.html",
+  "scripts": {
+    "dev": "serve . -p 3000",
+    "start": "serve ."
+  },
+  "keywords": [
+    "tulum-country-club",
+    "kaan-ha",
+    "luxury-real-estate",
+    "quiet-luxury",
+    "pga-riviera-maya"
+  ],
+  "author": "Antigravity",
+  "license": "UNLICENSED"
+}

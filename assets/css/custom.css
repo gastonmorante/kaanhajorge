@@ -1,0 +1,223 @@
+/* ==========================================================================
+   KAAN-HA LUXURY RESIDENCES - ORGANIC QUIET LUXURY DESIGN SYSTEM
+   Palette:
+   - arena-chukum: #E5D3B3
+   - deep-jungle:  #1B3022
+   - matte-gold:    #A68966
+   ========================================================================== */
+
+:root {
+  --color-arena-chukum: #E5D3B3;
+  --color-deep-jungle: #1B3022;
+  --color-deep-dark: #0D1912;
+  --color-matte-gold: #A68966;
+  --color-matte-gold-light: #CBB494;
+  --color-ivory: #FDFBF7;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0D1912;
+}
+::-webkit-scrollbar-thumb {
+  background: #A68966;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E5D3B3;
+}
+
+/* Base Smooth Scrolling & Mobile Touch */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0D1912;
+  color: #FDFBF7;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Native Touch Target & Tap Highlights */
+button, a, select, input, textarea {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safe Area Insets */
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+.safe-bottom-fixed {
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+/* Prevent iOS Safari Auto-Zoom on form focus */
+@media (max-width: 639px) {
+  input, select, textarea {
+    font-size: 16px !important; /* iOS standard to prevent auto-zoom */
+  }
+}
+
+/* Dynamic Viewport Height */
+.min-h-dvh {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(27, 48, 34, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(166, 137, 102, 0.25);
+}
+
+.glass-panel-light {
+  background: rgba(229, 211, 179, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(229, 211, 179, 0.18);
+}
+
+.glass-panel-gold {
+  background: rgba(166, 137, 102, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(166, 137, 102, 0.35);
+}
+
+/* Gold Gradient Shimmer */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #E5D3B3 0%, #CBB494 50%, #A68966 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Reveal on Scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+
+/* Subtle Parallax on Hero Container */
+.hero-parallax-bg {
+  will-change: transform;
+  transform: translateY(var(--parallax-offset, 0px)) scale(1.04);
+  transition: transform 0.1s ease-out;
+}
+
+/* WhatsApp Floating Pulse */
+@keyframes luxury-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(166, 137, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(166, 137, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(166, 137, 102, 0);
+  }
+}
+
+.whatsapp-pulse {
+  animation: luxury-pulse 2.8s infinite;
+}
+
+/* Subtle Shimmer Button */
+.btn-gold-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #A68966 0%, #8C6D47 100%);
+  color: #FDFBF7;
+  transition: all 0.4s ease;
+}
+
+.btn-gold-shimmer:hover {
+  background: linear-gradient(135deg, #BFA07C 0%, #A68966 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(166, 137, 102, 0.4);
+}
+
+.btn-gold-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(229, 211, 179, 0.25) 50%,
+    transparent 80%
+  );
+  transform: rotate(30deg) translateY(-100%);
+  transition: transform 0.75s ease;
+}
+
+.btn-gold-shimmer:hover::after {
+  transform: rotate(30deg) translateY(100%);
+}
+
+/* Typing Indicator Animation */
+.typing-dot {
+  animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Mobile Drawer Transitions */
+#mobile-drawer {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+#mobile-drawer.drawer-open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+#mobile-drawer.drawer-closed {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Native Mobile Bottom Sheet for AI Concierge on small screens */
+@media (max-width: 639px) {
+  #concierge-widget {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    max-height: 82dvh !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    margin-bottom: 0 !important;
+    z-index: 60 !important;
+  }
+}
