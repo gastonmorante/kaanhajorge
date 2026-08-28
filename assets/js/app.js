@@ -116,6 +116,9 @@ document.addEventListener("DOMContentLoaded", () => {
     initCarousel();
     initLightbox();
     initBrokerLink();
+
+    // Ensure page is strictly anchored at (0, 0) on start
+    window.scrollTo(0, 0);
   });
 
   /**
@@ -216,39 +219,15 @@ document.addEventListener("DOMContentLoaded", () => {
       heroVideo.volume = 0;
     }
 
-    // 2. Featured Video in Section 5 Has Full Audio & Interactive Play Overlay
-    const playOverlay = document.getElementById("video-play-overlay");
+    // 2. Featured Video in Section 5 Always Has Audio Enabled (User can mute natively)
     if (featuredVideo) {
       featuredVideo.muted = false;
       featuredVideo.defaultMuted = false;
       featuredVideo.volume = 1.0;
 
-      if (playOverlay) {
-        playOverlay.addEventListener("click", () => {
-          featuredVideo.muted = false;
-          featuredVideo.volume = 1.0;
-          featuredVideo.play().then(() => {
-            playOverlay.classList.add("opacity-0", "pointer-events-none");
-          }).catch(err => {
-            console.warn("Featured video play with audio:", err);
-          });
-        });
-      }
-
       featuredVideo.addEventListener("play", () => {
         featuredVideo.muted = false;
         featuredVideo.volume = 1.0;
-        if (playOverlay) playOverlay.classList.add("opacity-0", "pointer-events-none");
-      });
-
-      featuredVideo.addEventListener("pause", () => {
-        if (featuredVideo.currentTime === 0 || featuredVideo.ended) {
-          if (playOverlay) playOverlay.classList.remove("opacity-0", "pointer-events-none");
-        }
-      });
-
-      featuredVideo.addEventListener("ended", () => {
-        if (playOverlay) playOverlay.classList.remove("opacity-0", "pointer-events-none");
       });
     }
   }
@@ -547,8 +526,9 @@ document.addEventListener("DOMContentLoaded", () => {
       dots.forEach((dot, i) => {
         if (i === currentSlide) {
           dot.className = "w-6 h-2 rounded-full bg-matte-gold transition-all duration-300 shrink-0";
-          if (dot.scrollIntoView) {
-            dot.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+          if (carouselDots) {
+            const targetLeft = dot.offsetLeft - (carouselDots.clientWidth / 2) + (dot.clientWidth / 2);
+            carouselDots.scrollTo({ left: targetLeft, behavior: "smooth" });
           }
         } else {
           dot.className = "w-2 h-2 rounded-full bg-arena-chukum/30 hover:bg-arena-chukum/60 transition-all duration-300 shrink-0";
