@@ -6,7 +6,7 @@
 (function () {
   // Global State & Configuration
   const CONFIG = {
-    jorgePhone: "5216561436266",
+    waPhone: "5216561436266",
     secondaryEmail: "jorgeasoti@yahoo.com",
     brokerDriveUrl: "https://drive.google.com/drive/folders/1SntOa282Gi-bkTEfeL00HPE9c3YHN8S2?usp=drive_link",
     videosDriveUrl: "https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link",
@@ -224,8 +224,8 @@
 
   function updateWhatsAppMessages(lang) {
     const dict = window.I18N_DATA[lang] || window.I18N_DATA.es;
-    const message = dict.wa_message || "Hola Jorge, vi la reventa en planta baja de Kaan-Ha en Tulum Country Club y me gustaría recibir los detalles completos y agendar una visita privada.";
-    const waUrl = `https://wa.me/${CONFIG.jorgePhone}?text=${encodeURIComponent(message)}`;
+    const message = dict.wa_message || "Hola, vi la reventa en planta baja de Kaan-Ha en Tulum Country Club y me gustaría recibir los detalles completos y agendar una visita privada.";
+    const waUrl = `https://wa.me/${CONFIG.waPhone}?text=${encodeURIComponent(message)}`;
 
     if (floatingWaBtn) {
       floatingWaBtn.setAttribute("href", waUrl);
@@ -276,7 +276,7 @@
         property: "Kaan-Ha Luxury Resale Planta Baja - 2 BR con Terraza",
         property_price: "$536,000 USD (Reventa Planta Baja)",
         location: "Tulum Country Club, Quintana Roo, México",
-        broker_contact: "Jorge Sandoval (+52 1 656 143 6266)",
+        broker_contact: "Asesoría Inmobiliaria VIP (+52 1 656 143 6266)",
         secondary_notification_email: CONFIG.secondaryEmail,
         objective: document.getElementById("form-interest")?.value || document.getElementById("lead-interest")?.value || "Inversión Inmediata",
         custom_notes: document.getElementById("form-message")?.value || document.getElementById("lead-message")?.value || "Solicitud de Ficha Técnica y Cita VIP",
@@ -574,7 +574,7 @@
             appendMessage("assistant", reply);
           } else {
             removeTypingIndicator(typingIndicator);
-            appendMessage("assistant", "Estoy a su entera disposición para facilitarle la ficha técnica de la residencia en Planta Baja con terraza hacia garden y albercas, o conectarle directamente con Jorge Sandoval por WhatsApp al +52 1 656 143 6266.");
+            appendMessage("assistant", "Estoy a su entera disposición para facilitarle la ficha técnica de la residencia en Planta Baja con terraza hacia garden y albercas, o conectarle directamente con un asesor especializado por WhatsApp al +52 1 656 143 6266.");
           }
         } catch (err) {
           removeTypingIndicator(typingIndicator);
