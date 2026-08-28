@@ -68,7 +68,27 @@
   const galleryModalClose = document.getElementById("gallery-modal-close");
 
   // Initialize on DOM Ready
-  document.addEventListener("DOMContentLoaded", () => {
+  // 1. FORCED SCROLL RESTORATION TO TOP ON REFRESH & LOAD
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+if (window.location.hash && !['#es', '#en', '#fr', '#'].includes(window.location.hash)) {
+  try {
+    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+  } catch (e) {}
+}
+window.scrollTo(0, 0);
+
+window.addEventListener('load', () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+
+window.addEventListener('pageshow', () => {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
     initLanguage();
     initMobileDrawer();
     initVideoPlayers();
@@ -568,13 +588,15 @@
 
         const typingIndicator = appendTypingIndicator();
         try {
-          if (window.KaanHaConcierge && typeof window.KaanHaConcierge.query === "function") {
-            const reply = await window.KaanHaConcierge.query(userText, currentLang);
+          const agent = window.KaanHaConcierge || window.AI_CONCIERGE;
+          if (agent && (typeof agent.query === "function" || typeof agent.sendMessage === "function")) {
+            const fn = agent.query || agent.sendMessage;
+            const reply = await fn(userText, currentLang);
             removeTypingIndicator(typingIndicator);
             appendMessage("assistant", reply);
           } else {
             removeTypingIndicator(typingIndicator);
-            appendMessage("assistant", "Estoy a su entera disposición para facilitarle la ficha técnica de la residencia en Planta Baja con terraza hacia garden y albercas, o conectarle directamente con un asesor especializado por WhatsApp al +52 1 656 143 6266.");
+            appendMessage("assistant", "Kaan-Ha Residence es una oportunidad exclusiva de reventa en Planta Baja: 2 recámaras con baño spa, amplia terraza privada con salida directa a la zona garden y albercas del proyecto, finos acabados en piedra maya y maderas tropicales. Precio: $536,000 USD con entrega inmediata.");
           }
         } catch (err) {
           removeTypingIndicator(typingIndicator);
@@ -607,7 +629,7 @@
       ? "max-w-[85%] bg-matte-gold text-deep-jungle font-medium text-xs sm:text-sm rounded-2xl rounded-br-xs px-4 py-2.5 shadow-md"
       : "max-w-[85%] bg-deep-jungle/90 border border-matte-gold/30 text-arena-chukum text-xs sm:text-sm rounded-2xl rounded-bl-xs px-4 py-2.5 shadow-md leading-relaxed";
 
-    bubble.innerHTML = text.replace(/\n/g, "<br>");
+    bubble.innerHTML = text.includes("<div") ? text : text.replace(/\n/g, "<br>");
     row.appendChild(bubble);
     conciergeMessages.appendChild(row);
     conciergeMessages.scrollTop = conciergeMessages.scrollHeight;
