@@ -47,7 +47,7 @@
   </script>
 
   <!-- Custom Quiet Luxury CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css?v=3.0">
+  <link rel="stylesheet" href="assets/css/custom.css?v=3.1">
   <!-- Force Always Scroll to Top on Load or Refresh -->
   <script>
     if ('scrollRestoration' in history) {
@@ -235,12 +235,16 @@
         Exclusiva residencia en Planta Baja con amplia terraza privada que da directamente a la parte garden y albercas del proyecto, finos acabados en maderas tropicales y piedra natural con vistas despejadas al campo PGA Riviera Maya. Llave en mano, lista para habitar o rentar.
       </p>
 
-      <!-- Hero Call-To-Action Button -->
-      <div class="flex items-center justify-center reveal reveal-delay-3 px-4 sm:px-0">
-        <a href="#tour360" class="w-full sm:w-auto px-9 sm:px-12 py-3.5 sm:py-4 rounded-full glass-panel-gold border border-matte-gold/60 text-xs tracking-widest uppercase font-semibold text-arena-chukum hover:text-deep-jungle hover:bg-matte-gold transition-all flex items-center justify-center gap-2.5 shadow-xl active:scale-95 whitespace-nowrap">
+      <!-- Hero Call-To-Action Buttons (Tour 360 + Sound Toggle) -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 reveal reveal-delay-3 px-4 sm:px-0">
+        <a href="#tour360" class="w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 rounded-full glass-panel-gold border border-matte-gold/60 text-xs tracking-widest uppercase font-semibold text-arena-chukum hover:text-deep-jungle hover:bg-matte-gold transition-all flex items-center justify-center gap-2.5 shadow-xl active:scale-95 whitespace-nowrap">
           <svg class="w-4 h-4 text-matte-gold group-hover:text-deep-jungle shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
           <span data-i18n="hero_cta_tour">Explorar Tour 360°</span>
         </a>
+        <button id="hero-sound-toggle" type="button" aria-label="Activar o desactivar sonido del video" class="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-full glass-panel border border-matte-gold/40 text-xs tracking-widest uppercase font-semibold text-arena-chukum hover:text-white hover:border-matte-gold transition-all flex items-center justify-center gap-2 shadow-xl active:scale-95 whitespace-nowrap">
+          <span id="hero-sound-icon" class="text-sm">🔇</span>
+          <span id="hero-sound-text" data-i18n="hero_sound_unmute">Activar Audio</span>
+        </button>
       </div>
 
     </div>
@@ -420,7 +424,7 @@
 
       <!-- Video Player Frame -->
       <div class="max-w-5xl mx-auto rounded-2xl overflow-hidden glass-panel border border-matte-gold/40 shadow-2xl p-2 sm:p-4 reveal">
-        <div class="relative aspect-video w-full rounded-xl overflow-hidden bg-black/60 shadow-inner">
+        <div class="relative aspect-video w-full rounded-xl overflow-hidden bg-black/60 shadow-inner group">
           <video id="featured-video"
                  controls
                  playsinline
@@ -430,6 +434,17 @@
             <source id="featured-video-source" src="assets/videos/kaan-ha-es.mp4" type="video/mp4">
             Su navegador no soporta la reproducción de video.
           </video>
+
+          <!-- Luxury Play Overlay Button with Guaranteed Audio -->
+          <div id="video-play-overlay" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/40 hover:bg-black/30 backdrop-blur-[2px] transition-all cursor-pointer">
+            <button type="button" aria-label="Reproducir video oficial con audio" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-matte-gold text-deep-jungle flex items-center justify-center shadow-2xl transition-transform hover:scale-110 active:scale-95 group-hover:brightness-110">
+              <svg class="w-9 h-9 sm:w-11 sm:h-11 fill-current translate-x-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div class="mt-4 px-5 py-2 rounded-full glass-panel-gold border border-matte-gold/60 text-xs sm:text-sm text-arena-chukum font-medium flex items-center gap-2 shadow-xl">
+              <svg class="w-4 h-4 text-matte-gold animate-pulse shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+              <span data-i18n="video_overlay_play">Reproducir Video Oficial con Audio</span>
+            </div>
+          </div>
         </div>
 
         <!-- Video Info & CTA -->
@@ -1006,9 +1021,9 @@
   <!-- =========================================================================
        16. CORE SCRIPTS (I18N + AI CONCIERGE + APP CONTROLLER)
        ========================================================================= -->
-  <script src="assets/js/i18n.js?v=3.0"></script>
-  <script src="assets/js/concierge.js?v=3.0"></script>
-  <script src="assets/js/app.js?v=3.0"></script>
+  <script src="assets/js/i18n.js?v=3.1"></script>
+  <script src="assets/js/concierge.js?v=3.1"></script>
+  <script src="assets/js/app.js?v=3.1"></script>
 
 </body>
 </html>
