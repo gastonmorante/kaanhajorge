@@ -332,16 +332,17 @@
     carouselTrack.innerHTML = "";
     GALLERY_DATA.forEach((item, index) => {
       const slide = document.createElement("div");
-      slide.className = "w-full shrink-0 relative aspect-[16/10] sm:aspect-[16/9] bg-black/60 cursor-pointer overflow-hidden group";
+      slide.className = "carousel-slide-item w-full shrink-0 relative aspect-[16/10] sm:aspect-[16/9] bg-black/60 cursor-pointer overflow-hidden group";
       slide.setAttribute("data-slide-index", index);
 
-      const isEarly = index < 2;
+      const isEarly = index === 0;
       slide.innerHTML = `
         <picture class="w-full h-full block">
           <source srcset="assets/images/${item.base}.webp" type="image/webp">
           <img src="assets/images/${item.base}.jpg" 
                alt="Kaan-Ha Fotografía ${index + 1}" 
                loading="${isEarly ? 'eager' : 'lazy'}"
+               decoding="async"
                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
         </picture>
         <div class="absolute inset-0 bg-gradient-to-t from-deep-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

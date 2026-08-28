@@ -231,3 +231,48 @@ button, a, select, input, textarea {
   scrollbar-width: none;
 }
 
+/* Luxury Navigation Underline Hover & Active Effects */
+.nav-link-luxury {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  color: rgba(229, 211, 179, 0.85);
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link-luxury::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, #A68966, #E5D3B3);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1px;
+}
+.nav-link-luxury:hover {
+  color: #FDFBF7;
+}
+.nav-link-luxury:hover::after {
+  width: 100%;
+}
+
+/* Modern Text Balancing & Word Break Prevention */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Performance Optimization: Content Visibility for Offscreen Slides */
+.carousel-slide-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px 500px;
+}
+
+/* Header Hardware Acceleration & Crisp Rendering */
+header {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+

@@ -14,9 +14,13 @@
   <!-- Preload LCP Hero Poster Image for Instant Rendering -->
   <link rel="preload" as="image" href="assets/images/hero-poster.webp" type="image/webp" fetchpriority="high">
 
-  <!-- Google Fonts: EB Garamond (Titles) & Inter (Body) -->
+  <!-- Resource Preconnects for Ultra-Fast Page Speed -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://app.cloudpano.com">
+  <link rel="dns-prefetch" href="https://app.cloudpano.com">
+  <link rel="dns-prefetch" href="https://services.leadconnectorhq.com">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -43,62 +47,62 @@
   </script>
 
   <!-- Custom Quiet Luxury CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css?v=2.7">
+  <link rel="stylesheet" href="assets/css/custom.css?v=2.8">
 </head>
 <body class="bg-deep-dark text-ivory-white font-sans antialiased overflow-x-hidden selection:bg-matte-gold selection:text-deep-dark">
 
   <!-- =========================================================================
-       1. NAVIGATION HEADER
+       1. NAVIGATION HEADER (FLUID QUIET LUXURY - ZERO OVERFLOW)
        ========================================================================= -->
-  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-deep-dark/90 backdrop-blur-md border-b border-matte-gold/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-deep-dark/95 backdrop-blur-md border-b border-matte-gold/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3 sm:gap-4">
       
       <!-- Brand Logo -->
-      <a href="#" class="flex flex-col group">
-        <span class="font-serif text-2xl sm:text-3xl tracking-[0.2em] font-normal text-arena-chukum group-hover:text-matte-gold transition-colors">
+      <a href="#" class="flex flex-col group shrink-0">
+        <span class="font-serif text-xl sm:text-2xl md:text-3xl tracking-[0.2em] font-normal text-arena-chukum group-hover:text-matte-gold transition-colors whitespace-nowrap">
           KAAN-HA
         </span>
-        <span class="text-[10px] tracking-[0.25em] uppercase text-matte-gold/80 -mt-1" data-i18n="nav_brand_sub">
+        <span class="text-[9px] sm:text-[10px] tracking-[0.25em] uppercase text-matte-gold/80 -mt-0.5 whitespace-nowrap" data-i18n="nav_brand_sub">
           Tulum Country Club
         </span>
       </a>
 
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-xs tracking-widest uppercase font-medium">
-        <a href="#propiedad" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_property">La Residencia</a>
-        <a href="#video" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_video">Video</a>
-        <a href="#tour360" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_tour">Tour 360°</a>
-        <a href="#galeria" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_gallery">Galería de Fotos</a>
-        <a href="#amenidades" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_amenities">Amenidades PGA</a>
-        <a href="#ubicacion" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_location">Ubicación</a>
-        <a href="#contacto" class="text-arena-chukum/80 hover:text-matte-gold transition-colors" data-i18n="nav_contact">Contacto</a>
+      <!-- Desktop Navigation Links (Compact Luxury Spacing, No Word Breaks) -->
+      <nav class="hidden lg:flex items-center space-x-3.5 xl:space-x-6 text-[11px] xl:text-xs tracking-[0.14em] uppercase font-medium">
+        <a href="#propiedad" class="nav-link-luxury" data-i18n="nav_property">La Residencia</a>
+        <a href="#video" class="nav-link-luxury" data-i18n="nav_video">Video</a>
+        <a href="#tour360" class="nav-link-luxury" data-i18n="nav_tour">Tour 360°</a>
+        <a href="#galeria" class="nav-link-luxury" data-i18n="nav_gallery">Galería</a>
+        <a href="#amenidades" class="nav-link-luxury" data-i18n="nav_amenities">Amenidades</a>
+        <a href="#ubicacion" class="nav-link-luxury" data-i18n="nav_location">Ubicación</a>
+        <a href="#contacto" class="nav-link-luxury" data-i18n="nav_contact">Contacto</a>
       </nav>
 
       <!-- Language Selector & Actions -->
-      <div class="flex items-center space-x-3 sm:space-x-4">
+      <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
         
-        <!-- Desktop Language Switcher Pill (ES | EN | FR) -->
-        <div class="hidden sm:flex items-center p-1 rounded-full bg-deep-jungle/60 border border-matte-gold/30 text-xs tracking-wider font-semibold">
-          <button type="button" data-lang="es" class="lang-btn px-2.5 py-1 rounded-full transition-all bg-matte-gold text-deep-jungle font-bold">
+        <!-- Language Switcher Pill (ES | EN | FR) -->
+        <div class="flex items-center p-0.5 sm:p-1 rounded-full bg-deep-jungle/60 border border-matte-gold/30 text-xs tracking-wider font-semibold">
+          <button type="button" data-lang="es" class="lang-btn px-2 sm:px-2.5 py-1 rounded-full transition-all bg-matte-gold text-deep-jungle font-bold">
             ES
           </button>
-          <button type="button" data-lang="en" class="lang-btn px-2.5 py-1 rounded-full transition-all text-arena-chukum/70 hover:text-white">
+          <button type="button" data-lang="en" class="lang-btn px-2 sm:px-2.5 py-1 rounded-full transition-all text-arena-chukum/70 hover:text-white">
             EN
           </button>
-          <button type="button" data-lang="fr" class="lang-btn px-2.5 py-1 rounded-full transition-all text-arena-chukum/70 hover:text-white">
+          <button type="button" data-lang="fr" class="lang-btn px-2 sm:px-2.5 py-1 rounded-full transition-all text-arena-chukum/70 hover:text-white">
             FR
           </button>
         </div>
 
-        <!-- Header CTA Button -->
-        <a href="#contacto" class="hidden lg:inline-flex items-center px-5 py-2.5 text-xs tracking-widest uppercase font-semibold text-deep-jungle bg-matte-gold hover:bg-arena-chukum rounded-full transition-all shadow-md">
+        <!-- Header CTA Button (Visible on XL+ so it never squeezes navigation on medium laptops) -->
+        <a href="#contacto" class="hidden xl:inline-flex items-center px-4 xl:px-5 py-2.5 text-xs tracking-widest uppercase font-semibold text-deep-jungle bg-matte-gold hover:bg-arena-chukum rounded-full transition-all shadow-md whitespace-nowrap">
           <span data-i18n="nav_cta">Agendar Cita VIP</span>
         </a>
 
-        <!-- Mobile Hamburger Menu Button -->
+        <!-- Mobile/Tablet Hamburger Menu Button (Shows up to 1023px) -->
         <button id="mobile-menu-toggle" type="button" aria-label="Abrir menú de navegación" 
-                class="md:hidden p-2.5 rounded-full text-arena-chukum hover:text-white border border-matte-gold/40 bg-deep-jungle/70 flex items-center justify-center transition-transform active:scale-95 shadow-md">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                class="lg:hidden p-2 sm:p-2.5 rounded-full text-arena-chukum hover:text-white border border-matte-gold/40 bg-deep-jungle/70 flex items-center justify-center transition-transform active:scale-95 shadow-md shrink-0">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
 
       </div>
@@ -189,7 +193,7 @@
              muted
              loop
              playsinline
-             preload="auto"
+             preload="metadata"
              poster="assets/images/hero-poster.webp"
              class="w-full h-full object-cover transition-opacity duration-700">
         <source id="hero-video-source" src="assets/videos/kaan-ha-es.mp4" type="video/mp4">
@@ -202,55 +206,55 @@
     </div>
 
     <!-- Hero Content Container -->
-    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-12 sm:pt-16 pb-28 sm:pb-24">
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10 sm:pt-14 pb-28 sm:pb-24">
       
       <!-- Exclusive Badge -->
-      <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full glass-panel-gold mb-5 sm:mb-6 border border-matte-gold/40 reveal">
-        <span class="w-2 h-2 rounded-full bg-matte-gold animate-pulse"></span>
-        <span class="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-medium text-arena-chukum" data-i18n="hero_badge">
+      <div class="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full glass-panel-gold mb-5 sm:mb-6 border border-matte-gold/40 reveal max-w-[95vw]">
+        <span class="w-2 h-2 rounded-full bg-matte-gold animate-pulse shrink-0"></span>
+        <span class="text-[10px] sm:text-xs uppercase tracking-[0.14em] sm:tracking-[0.2em] font-medium text-arena-chukum text-center" data-i18n="hero_badge">
           Oportunidad Única de Reventa · Entrega Inmediata
         </span>
       </div>
 
       <!-- Main Headline (EB Garamond) -->
-      <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.1] text-ivory-white mb-5 sm:mb-6 reveal reveal-delay-1 px-2">
+      <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.12] text-ivory-white mb-5 sm:mb-6 reveal reveal-delay-1 px-2 text-balance break-words">
         <span class="gold-gradient-text" data-i18n="hero_title">
           Donde la Selva se rinde ante el Green
         </span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="max-w-3xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl font-light text-arena-chukum/90 leading-relaxed mb-8 sm:mb-10 reveal reveal-delay-2 px-2" data-i18n="hero_subtitle">
+      <p class="max-w-3xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl font-light text-arena-chukum/90 leading-relaxed mb-8 sm:mb-10 reveal reveal-delay-2 px-3 text-balance break-words" data-i18n="hero_subtitle">
         Exclusiva residencia en Planta Baja con amplia terraza privada que da directamente a la parte garden y albercas del proyecto, acabados en Chukum orgánico y vistas despejadas al campo PGA Riviera Maya. Llave en mano, lista para habitar o rentar.
       </p>
 
       <!-- Hero Call-To-Action Button -->
       <div class="flex items-center justify-center reveal reveal-delay-3 px-4 sm:px-0">
-        <a href="#tour360" class="w-full sm:w-auto px-9 sm:px-12 py-3.5 sm:py-4 rounded-full glass-panel-gold border border-matte-gold/60 text-xs tracking-widest uppercase font-semibold text-arena-chukum hover:text-deep-jungle hover:bg-matte-gold transition-all flex items-center justify-center gap-2.5 shadow-xl active:scale-95">
-          <svg class="w-4 h-4 text-matte-gold group-hover:text-deep-jungle" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        <a href="#tour360" class="w-full sm:w-auto px-9 sm:px-12 py-3.5 sm:py-4 rounded-full glass-panel-gold border border-matte-gold/60 text-xs tracking-widest uppercase font-semibold text-arena-chukum hover:text-deep-jungle hover:bg-matte-gold transition-all flex items-center justify-center gap-2.5 shadow-xl active:scale-95 whitespace-nowrap">
+          <svg class="w-4 h-4 text-matte-gold group-hover:text-deep-jungle shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
           <span data-i18n="hero_cta_tour">Explorar Tour 360°</span>
         </a>
       </div>
 
-      </div>
+    </div>
 
     <!-- Glassmorphic Key Metrics Strip (Bottom of Hero - 3 Balanced Columns) -->
-    <div class="absolute bottom-0 left-0 right-0 z-20 border-t border-matte-gold/20 bg-deep-dark/90 backdrop-blur-md">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-5 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 text-center">
+    <div class="absolute bottom-0 left-0 right-0 z-20 border-t border-matte-gold/20 bg-deep-dark/95 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-matte-gold/20">
         
-        <div class="p-1">
-          <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium" data-i18n="metric_typology_label">Nivel & Distribución</p>
-          <p class="font-serif text-base sm:text-xl md:text-2xl text-arena-chukum font-normal mt-0.5" data-i18n="metric_typology_val">Planta Baja · 2 Recámaras</p>
+        <div class="p-1 sm:px-4">
+          <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium whitespace-nowrap" data-i18n="metric_typology_label">Nivel & Distribución</p>
+          <p class="font-serif text-base sm:text-lg md:text-xl text-arena-chukum font-normal mt-0.5 whitespace-nowrap" data-i18n="metric_typology_val">Planta Baja · 2 Recámaras</p>
         </div>
 
-        <div class="p-1">
-          <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium" data-i18n="metric_outdoors_label">Exteriores</p>
-          <p class="font-serif text-base sm:text-xl md:text-2xl text-arena-chukum font-normal mt-0.5" data-i18n="metric_outdoors_val">Terraza hacia Garden & Albercas</p>
+        <div class="p-1 pt-2 sm:pt-1 sm:px-4">
+          <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium whitespace-nowrap" data-i18n="metric_outdoors_label">Exteriores</p>
+          <p class="font-serif text-base sm:text-lg md:text-xl text-arena-chukum font-normal mt-0.5 whitespace-nowrap" data-i18n="metric_outdoors_val">Terraza hacia Garden & Albercas</p>
         </div>
 
-        <div class="p-1">
-          <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium" data-i18n="metric_financing_label">Disponibilidad</p>
-          <p class="font-serif text-base sm:text-xl md:text-2xl text-arena-chukum font-normal mt-0.5" data-i18n="metric_financing_val">Entrega Inmediata · Llave en Mano</p>
+        <div class="p-1 pt-2 sm:pt-1 sm:px-4">
+          <p class="text-[10px] sm:text-[11px] uppercase tracking-widest text-matte-gold font-medium whitespace-nowrap" data-i18n="metric_financing_label">Disponibilidad</p>
+          <p class="font-serif text-base sm:text-lg md:text-xl text-arena-chukum font-normal mt-0.5 whitespace-nowrap" data-i18n="metric_financing_val">Entrega Inmediata · Llave en Mano</p>
         </div>
 
       </div>
@@ -994,9 +998,9 @@
   <!-- =========================================================================
        16. CORE SCRIPTS (I18N + AI CONCIERGE + APP CONTROLLER)
        ========================================================================= -->
-  <script src="assets/js/i18n.js?v=2.7"></script>
-  <script src="assets/js/concierge.js?v=2.7"></script>
-  <script src="assets/js/app.js?v=2.7"></script>
+  <script src="assets/js/i18n.js?v=2.8"></script>
+  <script src="assets/js/concierge.js?v=2.8"></script>
+  <script src="assets/js/app.js?v=2.8"></script>
 
 </body>
 </html>

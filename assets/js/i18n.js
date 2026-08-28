@@ -10,16 +10,14 @@ window.I18N_DATA = {
     "nav_property": "La Residencia",
     "nav_video": "Video",
     "nav_tour": "Tour 360°",
-    "nav_gallery": "Galería de Fotos",
-    "nav_amenities": "Amenidades PGA",
+    "nav_gallery": "Galería",
+    "nav_amenities": "Amenidades",
     "nav_location": "Ubicación",
     "nav_contact": "Contacto",
-    "nav_cta": "Agendar Cita Privada",
-    "hero_tag": "Oportunidad Exclusiva de Reventa · Planta Baja",
-    "hero_title_1": "Kaan-Ha",
-    "hero_title_2": "Residencia Privada",
+    "nav_cta": "Agendar Cita VIP",
+    "hero_badge": "Oportunidad Única de Reventa · Entrega Inmediata",
+    "hero_title": "Donde la Selva se rinde ante el Green",
     "hero_subtitle": "Exclusiva residencia en Planta Baja con amplia terraza privada con salida directa a la zona garden y albercas del proyecto, acabados en Chukum orgánico y vistas despejadas al campo PGA Riviera Maya. Llave en mano, lista para habitar o rentar.",
-    "hero_cta_dossier": "Descargar Dossier VIP",
     "hero_cta_tour": "Explorar Tour 360°",
     "metric_typology_label": "Nivel & Distribución",
     "metric_typology_val": "Planta Baja · 2 Recámaras",
@@ -180,16 +178,14 @@ window.I18N_DATA = {
     "nav_property": "The Residence",
     "nav_video": "Video",
     "nav_tour": "360° Tour",
-    "nav_gallery": "Photo Gallery",
-    "nav_amenities": "PGA Amenities",
+    "nav_gallery": "Gallery",
+    "nav_amenities": "Amenities",
     "nav_location": "Location",
     "nav_contact": "Contact",
-    "nav_cta": "Book Private Viewing",
-    "hero_tag": "Exclusive Resale Opportunity · Ground Floor",
-    "hero_title_1": "Kaan-Ha",
-    "hero_title_2": "Private Residence",
+    "nav_cta": "Book VIP Tour",
+    "hero_badge": "Exclusive Opportunity · Immediate Delivery",
+    "hero_title": "Where the Jungle bows to the Green",
     "hero_subtitle": "Exclusive ground-floor residence with a private terrace offering direct walkout to the garden and resort swimming pools, finished with organic Chukum and open views to PGA Riviera Maya. Turnkey and ready to occupy or lease.",
-    "hero_cta_dossier": "Download VIP Dossier",
     "hero_cta_tour": "Explore 360° Tour",
     "metric_typology_label": "Level & Layout",
     "metric_typology_val": "Ground Floor · 2 Bedrooms",
@@ -350,16 +346,14 @@ window.I18N_DATA = {
     "nav_property": "La Résidence",
     "nav_video": "Vidéo",
     "nav_tour": "Visite 360°",
-    "nav_gallery": "Galerie Photos",
-    "nav_amenities": "Prestations PGA",
+    "nav_gallery": "Galerie",
+    "nav_amenities": "Prestations",
     "nav_location": "Emplacement",
     "nav_contact": "Contact",
     "nav_cta": "Planifier une Visite",
-    "hero_tag": "Opportunité Exclusive de Revente · Rez-de-Chaussée",
-    "hero_title_1": "Kaan-Ha",
-    "hero_title_2": "Résidence Privée",
+    "hero_badge": "Opportunité Exclusive · Remise Immédiate",
+    "hero_title": "Où la Jungle s'incline devant le Green",
     "hero_subtitle": "Résidence d'exception en rez-de-chaussée avec terrasse privée donnant directement sur les jardins et piscines du domaine, finitions en Chukum organique et vue sur le golf PGA Riviera Maya. Clé en main, prête à habiter ou louer.",
-    "hero_cta_dossier": "Télécharger le Dossier VIP",
     "hero_cta_tour": "Explorer la Visite 360°",
     "metric_typology_label": "Niveau & Typologie",
     "metric_typology_val": "Rez-de-Chaussée · 2 Chambres",
@@ -542,9 +536,9 @@ window.translatePage = function (lang) {
   document.querySelectorAll(".lang-btn").forEach(btn => {
     const btnLang = btn.getAttribute("data-lang");
     if (btnLang === lang) {
-      btn.className = "lang-btn px-2.5 py-1 rounded-full transition-all bg-matte-gold text-deep-jungle font-bold shadow-sm";
+      btn.className = "lang-btn px-2 sm:px-2.5 py-1 rounded-full transition-all bg-matte-gold text-deep-jungle font-bold shadow-sm";
     } else {
-      btn.className = "lang-btn px-2.5 py-1 rounded-full transition-all text-arena-chukum/70 hover:text-white font-medium";
+      btn.className = "lang-btn px-2 sm:px-2.5 py-1 rounded-full transition-all text-arena-chukum/70 hover:text-white font-medium";
     }
   });
 
