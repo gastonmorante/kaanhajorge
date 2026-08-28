@@ -81,6 +81,9 @@ window.scrollTo(0, 0);
 
 window.addEventListener('load', () => {
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  setTimeout(() => {
+    document.documentElement.classList.add('smooth-scroll-ready');
+  }, 200);
 });
 
 window.addEventListener('pageshow', () => {
@@ -92,6 +95,20 @@ document.addEventListener("DOMContentLoaded", () => {
     initLanguage();
     initMobileDrawer();
     initVideoPlayers();
+  // Smooth scroll exclusively on user-initiated clicks on anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
     initWhatsAppLinks();
     initScrollEffects();
     initLeadForm();
@@ -192,31 +209,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function initVideoPlayers() {
     updateVideos(currentLang);
 
-    // 1. Hero Sound Toggle
-    const heroSoundToggle = document.getElementById("hero-sound-toggle");
-    const heroSoundIcon = document.getElementById("hero-sound-icon");
-    const heroSoundText = document.getElementById("hero-sound-text");
-
-    if (heroSoundToggle && heroVideo) {
-      heroSoundToggle.addEventListener("click", () => {
-        if (heroVideo.muted) {
-          heroVideo.muted = false;
-          heroVideo.volume = 1.0;
-          heroVideo.play().then(() => {
-            if (heroSoundIcon) heroSoundIcon.textContent = "🔊";
-            if (heroSoundText) heroSoundText.textContent = currentLang === "en" ? "Mute Audio" : (currentLang === "fr" ? "Couper le Son" : "Silenciar Audio");
-          }).catch(err => {
-            console.warn("Hero sound playback:", err);
-          });
-        } else {
-          heroVideo.muted = true;
-          if (heroSoundIcon) heroSoundIcon.textContent = "🔇";
-          if (heroSoundText) heroSoundText.textContent = currentLang === "en" ? "Play Sound" : (currentLang === "fr" ? "Activer le Son" : "Activar Audio");
-        }
-      });
+    // 1. Hero Background Video is Strictly Visual & Muted (No Audio on Hero)
+    if (heroVideo) {
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      heroVideo.volume = 0;
     }
 
-    // 2. Featured Video Play Overlay & Audio Enforcement
+    // 2. Featured Video in Section 5 Has Full Audio & Interactive Play Overlay
     const playOverlay = document.getElementById("video-play-overlay");
     if (featuredVideo) {
       featuredVideo.muted = false;
@@ -229,10 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
           featuredVideo.volume = 1.0;
           featuredVideo.play().then(() => {
             playOverlay.classList.add("opacity-0", "pointer-events-none");
-            if (heroVideo && !heroVideo.paused && !heroVideo.muted) {
-              heroVideo.muted = true;
-              if (heroSoundIcon) heroSoundIcon.textContent = "🔇";
-            }
           }).catch(err => {
             console.warn("Featured video play with audio:", err);
           });
@@ -243,10 +239,6 @@ document.addEventListener("DOMContentLoaded", () => {
         featuredVideo.muted = false;
         featuredVideo.volume = 1.0;
         if (playOverlay) playOverlay.classList.add("opacity-0", "pointer-events-none");
-        if (heroVideo && !heroVideo.paused && !heroVideo.muted) {
-          heroVideo.muted = true;
-          if (heroSoundIcon) heroSoundIcon.textContent = "🔇";
-        }
       });
 
       featuredVideo.addEventListener("pause", () => {
@@ -264,14 +256,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateVideos(lang) {
     const targetSrc = CONFIG.videoPaths[lang] || CONFIG.videoPaths.es;
 
-    // 1. Update Hero Video Player
+    // 1. Update Hero Video Player (Strictly Muted Background)
     if (heroVideo) {
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      heroVideo.volume = 0;
       const currentHero = heroVideo.currentSrc || (heroVideoSource ? heroVideoSource.getAttribute("src") : "");
       if (!currentHero.includes(targetSrc.replace(/^.*[\\/]/, ""))) {
         heroVideo.classList.add("opacity-60");
         setTimeout(() => {
           if (heroVideoSource) heroVideoSource.setAttribute("src", targetSrc);
           heroVideo.src = targetSrc;
+          heroVideo.muted = true;
+          heroVideo.defaultMuted = true;
+          heroVideo.volume = 0;
           heroVideo.load();
           const playPromise = heroVideo.play();
           if (playPromise !== undefined) {

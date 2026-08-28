@@ -32,12 +32,15 @@
 
 /* Base Smooth Scrolling & Mobile Touch */
 html {
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #0D1912;
   color: #FDFBF7;
   overflow-x: hidden;
+}
+
+html.smooth-scroll-ready {
+  scroll-behavior: smooth;
 }
 
 body {
