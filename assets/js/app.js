@@ -8,7 +8,7 @@
   const CONFIG = {
     jorgePhone: "5216561436266",
     secondaryEmail: "jorgeasoti@yahoo.com",
-    brokerDriveUrl: "https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link",
+    brokerDriveUrl: "https://drive.google.com/drive/folders/1SntOa282Gi-bkTEfeL00HPE9c3YHN8S2?usp=drive_link",
     videosDriveUrl: "https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link",
     ghlWebhookUrl: "https://services.leadconnectorhq.com/hooks/catch/custom-kaan-ha-webhook",
     videoPaths: {
