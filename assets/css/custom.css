@@ -221,3 +221,13 @@ button, a, select, input, textarea {
     z-index: 60 !important;
   }
 }
+
+/* Hide scrollbar for clean horizontal scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

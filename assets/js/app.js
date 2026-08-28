@@ -1,6 +1,6 @@
 /**
  * KAAN-HA LUXURY RESIDENCES - CORE CONTROLLER
- * Handles i18n, bilingual video switching, GHL webhook, WhatsApp sync, 360 tour, luxury carousel, and UI interactions.
+ * Handles i18n, bilingual video switching, GHL webhook, WhatsApp sync, 360 tour, 43-photo luxury carousel, and UI interactions.
  */
 
 (function () {
@@ -10,9 +10,7 @@
     secondaryEmail: "jorgeasoti@yahoo.com",
     brokerDriveUrl: "https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link",
     videosDriveUrl: "https://drive.google.com/drive/folders/1qnUCy0k1KjOYHNYn5kjn0cfUM3tVTlgQ?usp=drive_link",
-    // Configurable GoHighLevel Webhook URL
     ghlWebhookUrl: "https://services.leadconnectorhq.com/hooks/catch/custom-kaan-ha-webhook",
-    // Local / CDN fast-loading web video paths
     videoPaths: {
       es: "assets/videos/kaan-ha-es.mp4",
       en: "assets/videos/kaan-ha-en.mp4",
@@ -22,21 +20,11 @@
 
   let currentLang = "es";
 
-  // Gallery Slides Data (12 high-resolution curated photos)
-  const GALLERY_DATA = [
-    { id: 1, base: "gallery-01" },
-    { id: 2, base: "gallery-02" },
-    { id: 3, base: "gallery-03" },
-    { id: 4, base: "gallery-04" },
-    { id: 5, base: "gallery-05" },
-    { id: 6, base: "gallery-06" },
-    { id: 7, base: "gallery-07" },
-    { id: 8, base: "gallery-08" },
-    { id: 9, base: "gallery-09" },
-    { id: 10, base: "gallery-10" },
-    { id: 11, base: "gallery-11" },
-    { id: 12, base: "gallery-12" }
-  ];
+  // Gallery Slides Data: All 43 unique curated photos from the official Drive folder
+  const GALLERY_DATA = Array.from({ length: 43 }, (_, i) => ({
+    id: i + 1,
+    base: `gallery-${String(i + 1).padStart(2, "0")}`
+  }));
 
   let currentSlide = 0;
 
@@ -201,7 +189,7 @@
             playPromise.then(() => {
               heroVideo.classList.remove("opacity-60");
             }).catch(err => {
-              console.info("Hero video autoplay waiting for user tap:", err);
+              console.info("Hero video autoplay waiting for user interaction:", err);
               heroVideo.classList.remove("opacity-60");
             });
           }
@@ -236,7 +224,7 @@
 
   function updateWhatsAppMessages(lang) {
     const dict = window.I18N_DATA[lang] || window.I18N_DATA.es;
-    const message = dict.wa_message || "Hola Jorge, vi la reventa en planta baja de Kaan-Ha en Tulum Country Club y me gustar?a recibir los detalles completos y agendar una visita privada.";
+    const message = dict.wa_message || "Hola Jorge, vi la reventa en planta baja de Kaan-Ha en Tulum Country Club y me gustaría recibir los detalles completos y agendar una visita privada.";
     const waUrl = `https://wa.me/${CONFIG.jorgePhone}?text=${encodeURIComponent(message)}`;
 
     if (floatingWaBtn) {
@@ -275,7 +263,7 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline-block" fill="none" viewBox="0 0 24 24">
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <circle class="opacity-25" cx="12" cy="10" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg> Procesando...
       `;
@@ -287,11 +275,11 @@
         preferred_language: document.getElementById("form-preferred-lang")?.value || document.getElementById("lead-lang")?.value || currentLang,
         property: "Kaan-Ha Luxury Resale Planta Baja - 2 BR con Terraza",
         property_price: "$536,000 USD (Reventa Planta Baja)",
-        location: "Tulum Country Club, Quintana Roo, M?xico",
+        location: "Tulum Country Club, Quintana Roo, México",
         broker_contact: "Jorge Sandoval (+52 1 656 143 6266)",
         secondary_notification_email: CONFIG.secondaryEmail,
-        objective: document.getElementById("form-interest")?.value || document.getElementById("lead-interest")?.value || "Inversi?n Inmediata",
-        custom_notes: document.getElementById("form-message")?.value || document.getElementById("lead-message")?.value || "Solicitud de Ficha T?cnica y Cita VIP",
+        objective: document.getElementById("form-interest")?.value || document.getElementById("lead-interest")?.value || "Inversión Inmediata",
+        custom_notes: document.getElementById("form-message")?.value || document.getElementById("lead-message")?.value || "Solicitud de Ficha Técnica y Cita VIP",
         timestamp: new Date().toISOString(),
         source: window.location.href,
         referrer: document.referrer || "direct"
@@ -305,7 +293,7 @@
           body: JSON.stringify(formData)
         });
       } catch (err) {
-        console.warn("GoHighLevel Webhook webhook send handled:", err);
+        console.warn("GoHighLevel Webhook handled:", err);
       }
 
       submitBtn.disabled = false;
@@ -335,7 +323,7 @@
   }
 
   /**
-   * 6. LUXURY CAROUSEL CONTROLLER
+   * 6. LUXURY CAROUSEL CONTROLLER (43 CURATED SLIDES)
    */
   function initCarousel() {
     if (!carouselTrack) return;
@@ -347,22 +335,22 @@
       slide.className = "w-full shrink-0 relative aspect-[16/10] sm:aspect-[16/9] bg-black/60 cursor-pointer overflow-hidden group";
       slide.setAttribute("data-slide-index", index);
 
+      const isEarly = index < 2;
       slide.innerHTML = `
         <picture class="w-full h-full block">
           <source srcset="assets/images/${item.base}.webp" type="image/webp">
           <img src="assets/images/${item.base}.jpg" 
-               alt="Kaan-Ha Fotograf?a ${index + 1}" 
-               loading="${index === 0 ? 'eager' : 'lazy'}"
+               alt="Kaan-Ha Fotografía ${index + 1}" 
+               loading="${isEarly ? 'eager' : 'lazy'}"
                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
         </picture>
         <div class="absolute inset-0 bg-gradient-to-t from-deep-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
           <span class="px-4 py-2 rounded-full glass-panel text-xs uppercase tracking-widest text-arena-chukum border border-matte-gold/60 shadow-lg">
-            ?? Ampliar Imagen
+            🔍 Ampliar Imagen
           </span>
         </div>
       `;
 
-      // Click to open lightbox
       slide.addEventListener("click", () => {
         openLightbox(index);
       });
@@ -370,15 +358,15 @@
       carouselTrack.appendChild(slide);
     });
 
-    // 2. Build Pagination Dots
+    // 2. Build Pagination Dots (Compact scrollable bar for 43 dots)
     if (carouselDots) {
       carouselDots.innerHTML = "";
       GALLERY_DATA.forEach((_, index) => {
         const dot = document.createElement("button");
         dot.type = "button";
-        dot.setAttribute("aria-label", `Ir a fotograf?a ${index + 1}`);
-        dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-          index === 0 ? "bg-matte-gold w-8" : "bg-arena-chukum/30 hover:bg-arena-chukum/60"
+        dot.setAttribute("aria-label", `Ir a fotografía ${index + 1}`);
+        dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${
+          index === 0 ? "bg-matte-gold w-6" : "bg-arena-chukum/30 hover:bg-arena-chukum/60"
         }`;
         dot.addEventListener("click", () => {
           goToSlide(index);
@@ -452,7 +440,7 @@
       carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
     }
 
-    // Update Counter
+    // Update Counter (01 / 43)
     if (carouselCounter) {
       const num = String(currentSlide + 1).padStart(2, "0");
       const total = String(GALLERY_DATA.length).padStart(2, "0");
@@ -462,14 +450,17 @@
     // Update Caption
     updateCarouselCaptions(currentLang);
 
-    // Update Dots
+    // Update Dots (scroll dot into view if needed)
     if (carouselDots) {
       const dots = carouselDots.querySelectorAll("button");
       dots.forEach((dot, i) => {
         if (i === currentSlide) {
-          dot.className = "w-8 h-2.5 rounded-full bg-matte-gold transition-all duration-300";
+          dot.className = "w-6 h-2 rounded-full bg-matte-gold transition-all duration-300 shrink-0";
+          if (dot.scrollIntoView) {
+            dot.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+          }
         } else {
-          dot.className = "w-2.5 h-2.5 rounded-full bg-arena-chukum/30 hover:bg-arena-chukum/60 transition-all duration-300";
+          dot.className = "w-2 h-2 rounded-full bg-arena-chukum/30 hover:bg-arena-chukum/60 transition-all duration-300 shrink-0";
         }
       });
     }
@@ -479,7 +470,7 @@
     if (!carouselCaption) return;
     const dict = window.I18N_DATA[lang] || window.I18N_DATA.es;
     const slides = dict.gallery_slides || [];
-    const text = slides[currentSlide] || `Fotograf?a ${currentSlide + 1}`;
+    const text = slides[currentSlide] || `Fotografía ${currentSlide + 1}`;
     carouselCaption.textContent = text;
   }
   window.updateCarouselCaptions = updateCarouselCaptions;
@@ -582,11 +573,11 @@
             appendMessage("assistant", reply);
           } else {
             removeTypingIndicator(typingIndicator);
-            appendMessage("assistant", "Estoy a su entera disposici?n para facilitarle la ficha t?cnica de la residencia en Planta Baja con terraza hacia garden y albercas, o conectarle directamente con Jorge Sandoval por WhatsApp al +52 1 656 143 6266.");
+            appendMessage("assistant", "Estoy a su entera disposición para facilitarle la ficha técnica de la residencia en Planta Baja con terraza hacia garden y albercas, o conectarle directamente con Jorge Sandoval por WhatsApp al +52 1 656 143 6266.");
           }
         } catch (err) {
           removeTypingIndicator(typingIndicator);
-          appendMessage("assistant", "Con gusto puedo brindarle informaci?n sobre la distribuci?n, la terraza privada y el club de golf PGA. ?Gusta que le enviemos el dossier por WhatsApp?");
+          appendMessage("assistant", "Con gusto puedo brindarle información sobre la distribución, la terraza privada y el club de golf PGA. ¿Gusta que le enviemos el dossier por WhatsApp?");
         }
       });
     }
